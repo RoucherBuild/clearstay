@@ -89,7 +89,7 @@ export function Photo() {
   return (
     <>
       <RouteMeta
-        title="Passport photo sizes — ClearStay"
+        title="Passport photo sizes — Staywindow"
         description="Print layout and DPI notes for US, UK, EU/Schengen, Australian, and Canadian passport photo sizes. Browser-only preview."
       />
       <h1>Passport photo guide</h1>

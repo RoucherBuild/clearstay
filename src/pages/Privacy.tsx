@@ -4,8 +4,8 @@ export function Privacy() {
   return (
     <>
       <RouteMeta
-        title="Privacy — ClearStay"
-        description="ClearStay v1 has no accounts and no analytics. Trip data stays in localStorage and optional share URLs on your device."
+        title="Privacy — Staywindow"
+        description="Staywindow v1 has no accounts and no analytics. Trip data stays in localStorage and optional share URLs on your device."
       />
       <h1>Privacy</h1>
       <p className="lede">Short and honest for v1.</p>
@@ -15,7 +15,7 @@ export function Privacy() {
         </li>
         <li>
           <strong>Trip data on this device.</strong> The stay calculator stores trips in{' '}
-          <code>localStorage</code> (<code>clearstay.trips.v1</code>) and can encode them in the
+          <code>localStorage</code> (<code>staywindow.trips.v1</code>) and can encode them in the
           page URL so you can share a link.
         </li>
         <li>

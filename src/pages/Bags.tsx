@@ -28,7 +28,7 @@ export function Bags() {
   return (
     <>
       <RouteMeta
-        title="Cabin bag size comparison — ClearStay"
+        title="Cabin bag size comparison — Staywindow"
         description="Compare typical cabin bag dimensions for major airlines. Approximate — confirm on the airline site before you fly."
       />
       <h1>Cabin bag comparison</h1>

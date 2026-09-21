@@ -23,7 +23,7 @@ export function Layout() {
       <header className="site-header">
         <div className="header-inner">
           <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
-            ClearStay
+            Staywindow
           </NavLink>
           <button
             type="button"
@@ -63,7 +63,7 @@ export function Layout() {
 
       <footer className="site-footer">
         <p className="footer-disclaimer">
-          Not official advice. ClearStay is an independent planning tool — not a government
+          Not official advice. Staywindow is an independent planning tool — not a government
           site, visa shop, or claim company.
         </p>
         <p>

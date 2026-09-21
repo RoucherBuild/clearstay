@@ -5,13 +5,13 @@ export function Faq() {
   return (
     <>
       <RouteMeta
-        title="FAQ — ClearStay"
-        description="Short answers about ClearStay’s Schengen calculator, privacy, and what we do not do."
+        title="FAQ — Staywindow"
+        description="Short answers about Staywindow’s Schengen calculator, privacy, and what we do not do."
       />
       <h1>FAQ</h1>
 
       <section className="qa-block">
-        <h2>Is ClearStay official?</h2>
+        <h2>Is Staywindow official?</h2>
         <p>No. We are an independent planning tool. Always verify with official EU sources.</p>
       </section>
 

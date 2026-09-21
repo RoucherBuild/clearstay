@@ -133,7 +133,7 @@ export function Stay() {
   return (
     <>
       <RouteMeta
-        title="Schengen stay calculator — ClearStay"
+        title="Schengen stay calculator — Staywindow"
         description="Add trips and see days used and remaining in the rolling 180-day Schengen window. Data stays on this device."
       />
       <h1>Schengen stay calculator</h1>

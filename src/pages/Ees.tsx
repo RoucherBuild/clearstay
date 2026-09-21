@@ -7,7 +7,7 @@ export function Ees() {
   return (
     <>
       <RouteMeta
-        title="What is EES? — ClearStay"
+        title="What is EES? — Staywindow"
         description="Plain explainer of the EU Entry/Exit System (EES): who it affects, how it differs from ETIAS, and what travellers should do. Official links only."
       />
       <h1>Entry/Exit System (EES)</h1>
@@ -47,7 +47,7 @@ export function Ees() {
         <h2>4. What should I do?</h2>
         <p>
           Read the official EU pages, allow a little extra time at first EES registration, and
-          keep tracking your own 90/180 days with a calculator (including ClearStay’s stay tool).
+          keep tracking your own 90/180 days with a calculator (including Staywindow’s stay tool).
           Do not buy “EES packages” from random sites.
         </p>
         <ul className="link-list">

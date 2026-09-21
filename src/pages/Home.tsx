@@ -5,13 +5,13 @@ export function Home() {
   return (
     <>
       <RouteMeta
-        title="ClearStay — How many Europe days do you have left?"
+        title="Staywindow — How many Europe days do you have left?"
         description="Check Schengen 90/180 days left, flight delay bands, cabin bag limits, and passport photo sizes. Free planning tools — data stays on your device."
       />
       <section className="hero-block">
         <h1>How many Europe days do you have left?</h1>
         <p className="lede">
-          ClearStay helps visa-free travellers track the Schengen 90/180 rule and related trip
+          Staywindow helps visa-free travellers track the Schengen 90/180 rule and related trip
           utilities. Calm numbers, no sales pitch.
         </p>
         <div className="cta-row">

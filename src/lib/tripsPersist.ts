@@ -1,15 +1,38 @@
 import type { Trip } from './schengen'
 
-export const TRIPS_STORAGE_KEY = 'clearstay.trips.v1'
+export const TRIPS_STORAGE_KEY = 'staywindow.trips.v1'
+/** Pre-rebrand key; migrated once into TRIPS_STORAGE_KEY on load. */
+export const LEGACY_TRIPS_STORAGE_KEY = 'clearstay.trips.v1'
 
 export type PersistedTrips = {
   trips: Trip[]
   asOf?: string
 }
 
-export function loadTripsFromStorage(): PersistedTrips | null {
+/**
+ * If the new key is missing and the legacy ClearStay key exists, copy once
+ * then remove the old key after a successful write.
+ */
+export function migrateTripsStorageOnce(
+  storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = localStorage,
+): void {
   try {
-    const raw = localStorage.getItem(TRIPS_STORAGE_KEY)
+    if (storage.getItem(TRIPS_STORAGE_KEY) != null) return
+    const legacy = storage.getItem(LEGACY_TRIPS_STORAGE_KEY)
+    if (legacy == null) return
+    storage.setItem(TRIPS_STORAGE_KEY, legacy)
+    storage.removeItem(LEGACY_TRIPS_STORAGE_KEY)
+  } catch {
+    // ignore quota / private mode / missing storage
+  }
+}
+
+export function loadTripsFromStorage(
+  storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = localStorage,
+): PersistedTrips | null {
+  try {
+    migrateTripsStorageOnce(storage)
+    const raw = storage.getItem(TRIPS_STORAGE_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw) as PersistedTrips
     if (!parsed || !Array.isArray(parsed.trips)) return null
@@ -19,9 +42,12 @@ export function loadTripsFromStorage(): PersistedTrips | null {
   }
 }
 
-export function saveTripsToStorage(data: PersistedTrips): void {
+export function saveTripsToStorage(
+  data: PersistedTrips,
+  storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = localStorage,
+): void {
   try {
-    localStorage.setItem(TRIPS_STORAGE_KEY, JSON.stringify(data))
+    storage.setItem(TRIPS_STORAGE_KEY, JSON.stringify(data))
   } catch {
     // ignore quota / private mode
   }

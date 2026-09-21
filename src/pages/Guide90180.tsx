@@ -8,7 +8,7 @@ export function Guide90180() {
   return (
     <>
       <RouteMeta
-        title="Schengen 90/180 explained — ClearStay"
+        title="Schengen 90/180 explained — Staywindow"
         description="Plain-English guide to the Schengen rolling 180-day window: entry and exit both count, overlapping days count once."
       />
       <h1>The 90/180 rule, in plain English</h1>

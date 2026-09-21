@@ -51,7 +51,7 @@ export function Flights() {
   return (
     <>
       <RouteMeta
-        title="Flight delay compensation bands — ClearStay"
+        title="Flight delay compensation bands — Staywindow"
         description="Rough EU261 / UK261 delay compensation money bands by distance. Not a claim company — estimate only."
       />
       <h1>Flight delay compensation bands</h1>

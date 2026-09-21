@@ -5,12 +5,12 @@ export function About() {
   return (
     <>
       <RouteMeta
-        title="About — ClearStay"
-        description="ClearStay is a calm travel-utility site for Schengen day counting and related trip tools. Not official advice."
+        title="About — Staywindow"
+        description="Staywindow is a calm travel-utility site for Schengen day counting and related trip tools. Not official advice."
       />
-      <h1>About ClearStay</h1>
+      <h1>About Staywindow</h1>
       <p className="lede">
-        ClearStay is a small set of travel utilities: Schengen day counting, delay compensation
+        Staywindow is a small set of travel utilities: Schengen day counting, delay compensation
         bands, cabin bag size checks, and passport photo size guides.
       </p>
       <p>
