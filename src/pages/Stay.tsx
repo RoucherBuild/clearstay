@@ -176,7 +176,7 @@ export function Stay() {
           />
         </label>
         <p id="asof-help" className="muted">
-          Defaults to today (YYYY-MM-DD). The 180-day window ends on this date.
+          Defaults to today (shown in your device’s date format). The 180-day window ends on this date.
         </p>
       </section>
 
