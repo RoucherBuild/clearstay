@@ -22,6 +22,7 @@ export function Home() {
             My flight was delayed
           </Link>
         </div>
+        <p className="unofficial-line">Unofficial estimate — not the EU.</p>
       </section>
 
       <section className="tile-grid" aria-label="Tools">

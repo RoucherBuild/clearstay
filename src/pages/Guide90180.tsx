@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
-
-const EU_CALC =
-  'https://ec.europa.eu/immigration/visas-border-crossings/border-crossing/schengen-calculator_en'
+import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
 
 export function Guide90180() {
   return (
@@ -57,7 +55,7 @@ export function Guide90180() {
       </p>
       <p className="muted">
         Official reference:{' '}
-        <a href={EU_CALC} target="_blank" rel="noopener noreferrer">
+        <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
           EU short-stay calculator
         </a>
       </p>

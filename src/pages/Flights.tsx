@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { RouteMeta } from '../components/RouteMeta'
+import { TermsGate } from '../components/TermsGate'
 import {
   AIRPORTS,
   BAND_PAYOUT,
@@ -9,11 +10,31 @@ import {
   isUsDomestic,
   type DistanceBand,
 } from '../lib/airports'
+import { hasAcceptedTerms } from '../lib/termsGate'
 
 type CarrierType = 'eu_uk' | 'other'
 type BandChoice = DistanceBand | 'auto'
 
 export function Flights() {
+  const [accepted, setAccepted] = useState(() => hasAcceptedTerms())
+
+  if (!accepted) {
+    return (
+      <div className="flights-page">
+        <RouteMeta
+          title="Flight delay compensation bands — Staywindow"
+          description="Rough EU261 / UK261 delay compensation money bands by distance. Not a claim company — estimate only."
+        />
+        <h1>Flight delay compensation bands</h1>
+        <TermsGate onAccepted={() => setAccepted(true)} />
+      </div>
+    )
+  }
+
+  return <FlightsCalculator />
+}
+
+function FlightsCalculator() {
   const [dep, setDep] = useState('LHR')
   const [arr, setArr] = useState('JFK')
   const [otherDep, setOtherDep] = useState(false)
@@ -199,6 +220,9 @@ export function Flights() {
                 <span className="num-label">UK261-style band (approx.)</span>
               </div>
             </div>
+            <p className="estimate-note">
+              Estimate only — not a determination that money is owed.
+            </p>
             <p className="muted">
               GBP figures are approximate UK261 parallels — check current CAA / airline wording.
             </p>

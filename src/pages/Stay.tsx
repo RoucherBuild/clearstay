@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
+import { TermsGate } from '../components/TermsGate'
 import {
   SCHENGEN_COUNTRIES,
   daysRemaining,
@@ -10,6 +11,8 @@ import {
   windowBounds,
   type Trip,
 } from '../lib/schengen'
+import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
+import { hasAcceptedTerms } from '../lib/termsGate'
 import {
   decodeTripsFromSearch,
   encodeTripsToSearch,
@@ -32,7 +35,6 @@ const EXTRA_COUNTRIES = [
 const SCHENGEN_SET = new Set<string>(SCHENGEN_COUNTRIES)
 const COUNTRY_OPTIONS = [...SCHENGEN_COUNTRIES, ...EXTRA_COUNTRIES]
 
-
 function statusLabel(s: 'Safe' | 'Tight' | 'Over'): string {
   if (s === 'Safe') return 'Under the usual cap (estimate)'
   if (s === 'Tight') return 'Tight (estimate)'
@@ -49,6 +51,27 @@ function emptyDraft(): Omit<Trip, 'id'> {
 }
 
 export function Stay() {
+  const [accepted, setAccepted] = useState(() => hasAcceptedTerms())
+
+  if (!accepted) {
+    return (
+      <>
+        <RouteMeta
+          title="Schengen stay calculator — Staywindow"
+          description="Add trips and see days used and remaining in the rolling 180-day Schengen window. Data stays on this device."
+        />
+        <h1>Schengen stay calculator</h1>
+        <TermsGate onAccepted={() => setAccepted(true)} />
+        <p className="unofficial-line">Unofficial estimate — not the EU.</p>
+      </>
+    )
+  }
+
+  return <StayCalculator />
+}
+
+/** Mounted only after terms acceptance so hydrate/save/sample do not run beforehand. */
+function StayCalculator() {
   const navigate = useNavigate()
   const location = useLocation()
   const [trips, setTrips] = useState<Trip[]>([])
@@ -147,6 +170,7 @@ export function Stay() {
       <p className="lede">
         Add entry/exit dates. Overlapping days count once. Non-Schengen countries contribute 0.
       </p>
+      <p className="unofficial-line">Unofficial estimate — not the EU.</p>
 
       <div className="toolbar">
         <button type="button" className="btn btn-secondary" onClick={loadSample}>
@@ -277,6 +301,13 @@ export function Stay() {
             <span className="hero-remaining">{computed.remaining}</span>
             <span className="hero-remaining-label">days remaining</span>
           </div>
+          <p className="estimate-note">
+            Estimate only. Confirm with the{' '}
+            <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
+              official EU short-stay calculator
+            </a>
+            .
+          </p>
           <div className="result-numbers">
             <div>
               <span className="used-num">{computed.used}</span>
@@ -322,7 +353,6 @@ export function Stay() {
           </p>
         </section>
       )}
-
     </>
   )
 }

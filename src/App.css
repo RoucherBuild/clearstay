@@ -636,3 +636,36 @@
   overflow-x: clip;
   max-width: 100%;
 }
+
+
+.btn-primary:disabled,
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.terms-gate h2 {
+  color: var(--horizon);
+  margin-top: 0;
+}
+
+.terms-gate-check {
+  margin: 1rem 0;
+}
+
+.unofficial-line {
+  color: var(--mute);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem;
+}
+
+.estimate-note {
+  color: var(--mute);
+  font-size: 0.95rem;
+  margin: 0.35rem 0 0.85rem;
+}
+
+.estimate-note a {
+  color: var(--horizon);
+}
