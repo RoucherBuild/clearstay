@@ -9,6 +9,10 @@ export function Privacy() {
       />
       <h1>Privacy</h1>
       <p className="lede">Short and honest for v1.</p>
+      <p className="disclaimer" role="note">
+        Staywindow is an independent unofficial tool. It has no affiliation with the EU, any
+        state, or any airline.
+      </p>
       <ul className="plain-list">
         <li>
           <strong>No accounts.</strong> You do not sign in.

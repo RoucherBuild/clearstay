@@ -10,6 +10,7 @@ import { Guide90180 } from './pages/Guide90180'
 import { Faq } from './pages/Faq'
 import { About } from './pages/About'
 import { Privacy } from './pages/Privacy'
+import { Terms } from './pages/Terms'
 import './App.css'
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/about" element={<About />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Route>
     </Routes>
   )

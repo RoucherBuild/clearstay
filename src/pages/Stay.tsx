@@ -32,6 +32,13 @@ const EXTRA_COUNTRIES = [
 const SCHENGEN_SET = new Set<string>(SCHENGEN_COUNTRIES)
 const COUNTRY_OPTIONS = [...SCHENGEN_COUNTRIES, ...EXTRA_COUNTRIES]
 
+
+function statusLabel(s: 'Safe' | 'Tight' | 'Over'): string {
+  if (s === 'Safe') return 'Under the usual 90-day cap (estimate)'
+  if (s === 'Tight') return 'Tight (estimate)'
+  return 'Over (estimate)'
+}
+
 function emptyDraft(): Omit<Trip, 'id'> {
   return {
     country: 'Spain',
@@ -277,7 +284,7 @@ export function Stay() {
             </div>
             <div>
               <span className={`status-pill status-${computed.stayStatus.toLowerCase()}`}>
-                {computed.stayStatus}
+                {statusLabel(computed.stayStatus)}
               </span>
               <span className="num-label">status</span>
             </div>
@@ -309,6 +316,10 @@ export function Stay() {
           {!computed.nextFull && computed.remaining === 90 && (
             <p className="muted">You currently have a full 90 days remaining.</p>
           )}
+
+          <p className="disclaimer">
+            This is not permission to travel. Border officers and EES records control.
+          </p>
         </section>
       )}
 

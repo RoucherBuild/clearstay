@@ -100,7 +100,7 @@ export function Bags() {
                 Weight: {a.maxKg != null ? `~${a.maxKg} kg` : 'not a fixed kg / check fare'}
               </p>
               <p className={fit ? 'fit-pass' : 'fit-fail'}>
-                {fit ? 'Pass (approx.)' : 'Fail (approx.)'}
+                {fit ? 'Looks within published limit' : 'Looks over published limit'}
               </p>
               <p className="muted small">{a.notes}</p>
             </article>

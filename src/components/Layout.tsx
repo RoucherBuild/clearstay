@@ -12,9 +12,6 @@ const NAV = [
   { to: '/faq', label: 'FAQ' },
 ]
 
-const EU_CALC =
-  'https://ec.europa.eu/immigration/visas-border-crossings/border-crossing/schengen-calculator_en'
-
 export function Layout() {
   const [open, setOpen] = useState(false)
 
@@ -63,19 +60,11 @@ export function Layout() {
 
       <footer className="site-footer">
         <p className="footer-disclaimer">
-          Not official advice. Staywindow is an independent planning tool — not a government
-          site, visa shop, or claim company.
-        </p>
-        <p>
-          <a href={EU_CALC} target="_blank" rel="noopener noreferrer">
-            EU short-stay calculator
-          </a>
+          Not official advice
+          {' · '}
+          <NavLink to="/terms">Terms</NavLink>
           {' · '}
           <NavLink to="/privacy">Privacy</NavLink>
-          {' · '}
-          <NavLink to="/about">About</NavLink>
-          {' · '}
-          <NavLink to="/faq">FAQ</NavLink>
         </p>
         <p className="footer-note">Your trip data stays on this device.</p>
       </footer>
