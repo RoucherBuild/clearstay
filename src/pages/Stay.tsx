@@ -34,7 +34,7 @@ const COUNTRY_OPTIONS = [...SCHENGEN_COUNTRIES, ...EXTRA_COUNTRIES]
 
 
 function statusLabel(s: 'Safe' | 'Tight' | 'Over'): string {
-  if (s === 'Safe') return 'Under the usual 90-day cap (estimate)'
+  if (s === 'Safe') return 'Under the usual cap (estimate)'
   if (s === 'Tight') return 'Tight (estimate)'
   return 'Over (estimate)'
 }
@@ -273,14 +273,14 @@ export function Stay() {
           aria-live="polite"
         >
           <h2>Result</h2>
+          <div className="result-hero">
+            <span className="hero-remaining">{computed.remaining}</span>
+            <span className="hero-remaining-label">days remaining</span>
+          </div>
           <div className="result-numbers">
             <div>
-              <span className="big-num">{computed.used}</span>
+              <span className="used-num">{computed.used}</span>
               <span className="num-label">days used</span>
-            </div>
-            <div>
-              <span className="big-num">{computed.remaining}</span>
-              <span className="num-label">days remaining</span>
             </div>
             <div>
               <span className={`status-pill status-${computed.stayStatus.toLowerCase()}`}>

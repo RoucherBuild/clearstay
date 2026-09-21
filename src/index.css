@@ -1,20 +1,34 @@
 :root {
-  --bg: #f4f6f9;
-  --surface: #ffffff;
-  --text: #1e293b;
-  --text-muted: #64748b;
-  --heading: #0f172a;
-  --border: #dbe3ee;
-  --accent: #1d4ed8;
-  --accent-hover: #1e40af;
-  --accent-soft: #dbeafe;
-  --safe: #047857;
-  --safe-bg: #ecfdf5;
-  --tight: #b45309;
-  --tight-bg: #fffbeb;
-  --over: #b91c1c;
-  --over-bg: #fef2f2;
-  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+  /* Staywindow visual tokens */
+  --paper: #F6F1E8;
+  --card: #FFFCF7;
+  --ink: #1A2330;
+  --mute: #5E6B78;
+  --line: #E4D9C8;
+  --horizon: #0E6B66;
+  --horizon-hover: #0A5450;
+  --under-fg: #2C6A56;
+  --under-bg: #E4F0EA;
+  --tight-fg: #8A5A10;
+  --tight-bg: #F6EBD3;
+  --over-fg: #8F3B32;
+  --over-bg: #F6E4E0;
+
+  /* Mapped aliases for existing component CSS */
+  --bg: var(--paper);
+  --surface: var(--card);
+  --text: var(--ink);
+  --text-muted: var(--mute);
+  --heading: var(--ink);
+  --border: var(--line);
+  --accent: var(--horizon);
+  --accent-hover: var(--horizon-hover);
+  --accent-soft: var(--under-bg);
+  --safe: var(--under-fg);
+  --safe-bg: var(--under-bg);
+  --tight: var(--tight-fg);
+  --over: var(--over-fg);
+  --shadow: 0 1px 2px rgb(26 35 48 / 0.06), 0 8px 24px rgb(26 35 48 / 0.05);
   --radius: 12px;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -22,8 +36,8 @@
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.5;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--ink);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -36,6 +50,8 @@
 body {
   margin: 0;
   min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
 }
 
 #root {
@@ -45,7 +61,7 @@ body {
 h1,
 h2,
 h3 {
-  color: var(--heading);
+  color: var(--ink);
   font-weight: 650;
   line-height: 1.2;
   margin: 0 0 0.6rem;
@@ -69,13 +85,13 @@ p {
 }
 
 a {
-  color: var(--accent);
+  color: var(--horizon);
 }
 
 code {
   font-family: var(--mono);
   font-size: 0.9em;
-  background: var(--accent-soft);
+  background: var(--under-bg);
   padding: 0.1em 0.35em;
   border-radius: 4px;
 }
