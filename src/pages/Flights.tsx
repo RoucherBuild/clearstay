@@ -49,7 +49,7 @@ export function Flights() {
     band != null
 
   return (
-    <>
+    <div className="flights-page">
       <RouteMeta
         title="Flight delay compensation bands — Staywindow"
         description="Rough EU261 / UK261 delay compensation money bands by distance. Not a claim company — estimate only."
@@ -213,6 +213,6 @@ export function Flights() {
           an adviser.
         </p>
       </section>
-    </>
+    </div>
   )
 }

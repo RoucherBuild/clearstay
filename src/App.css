@@ -537,3 +537,34 @@
     font-size: 2rem;
   }
 }
+
+/* Flights page: constrain selects within ~390px viewports */
+.flights-page .form-grid {
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 100%;
+}
+
+.flights-page .field {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.flights-page .field input,
+.flights-page .field select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.flights-page .field select {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flights-page .card {
+  overflow-x: clip;
+  max-width: 100%;
+}
