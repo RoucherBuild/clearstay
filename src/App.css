@@ -550,7 +550,7 @@
   max-width: 100%;
 }
 
-.flights-page .field input,
+.flights-page .field input:not([type='checkbox']),
 .flights-page .field select {
   width: 100%;
   max-width: 100%;
@@ -562,6 +562,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.flights-page .checkbox-field {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.55rem;
+}
+
+.flights-page .checkbox-field input[type='checkbox'] {
+  width: auto;
+  max-width: none;
+  min-width: auto;
+  flex: 0 0 auto;
+  margin-top: 0.25rem;
+}
+
+.flights-page .checkbox-field > span {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .flights-page .card {
