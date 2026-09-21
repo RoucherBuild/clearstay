@@ -17,6 +17,9 @@ export function About() {
         Staywindow is an independent unofficial tool. It has no affiliation with the EU, any
         state, or any airline.
       </p>
+      <p className="contact-line">
+        Contact: <a href="mailto:hello@thestaywindow.com">hello@thestaywindow.com</a>
+      </p>
       <p>
         We aim for high-contrast numbers and honest disclaimers. We are not a government site,
         not a visa shop, and not a claim company.

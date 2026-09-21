@@ -13,6 +13,9 @@ export function Privacy() {
         Staywindow is an independent unofficial tool. It has no affiliation with the EU, any
         state, or any airline.
       </p>
+      <p className="contact-line">
+        Contact: <a href="mailto:hello@thestaywindow.com">hello@thestaywindow.com</a>
+      </p>
       <ul className="plain-list">
         <li>
           <strong>No accounts.</strong> You do not sign in.

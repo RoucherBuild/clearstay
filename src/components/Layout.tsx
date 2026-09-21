@@ -66,6 +66,9 @@ export function Layout() {
           {' · '}
           <NavLink to="/privacy">Privacy</NavLink>
         </p>
+        <p className="footer-contact">
+          Contact: <a href="mailto:hello@thestaywindow.com">hello@thestaywindow.com</a>
+        </p>
         <p className="footer-note">Your trip data stays on this device.</p>
       </footer>
     </div>
