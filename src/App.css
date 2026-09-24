@@ -824,3 +824,38 @@
     height: 9px;
   }
 }
+
+
+/* Nationality checklist strip — warm paper card */
+.nationality-rules h2 {
+  color: var(--horizon);
+  margin-top: 0;
+}
+
+.nationality-rules h3 {
+  font-size: 1.05rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--ink);
+}
+
+.nationality-rules .field {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.nationality-rules-body .plain-list {
+  margin: 0.35rem 0 0.85rem;
+}
+
+.nationality-rules-body .plain-list li + li {
+  margin-top: 0.45rem;
+}
+
+.nationality-rules-body .link-list {
+  margin: 0.25rem 0 0;
+}
+
+.home-nationality-note {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+}

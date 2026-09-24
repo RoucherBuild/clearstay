@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
 import { TermsGate } from '../components/TermsGate'
 import { EesCompanionCard } from '../components/EesCompanionCard'
+import { NationalityRulesStrip } from '../components/NationalityRulesStrip'
 import { StayTimeline } from '../components/StayTimeline'
 import { StayNextTripFit } from '../components/StayNextTripFit'
 import {
@@ -188,6 +189,8 @@ function StayCalculator() {
         Add entry/exit dates. Overlapping days count once. Non-Schengen countries contribute 0.
       </p>
       <p className="unofficial-line">Unofficial estimate — not the EU.</p>
+
+      <NationalityRulesStrip />
 
       <div className="toolbar">
         <button type="button" className="btn btn-secondary" onClick={loadSample}>

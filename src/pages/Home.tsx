@@ -23,6 +23,10 @@ export function Home() {
           </Link>
         </div>
         <p className="unofficial-line">Unofficial estimate — not the EU.</p>
+        <p className="muted home-nationality-note">
+          US, UK, Australia, or Canada passport? See the{' '}
+          <Link to="/stay">nationality checklist on Stay</Link> (not legal advice).
+        </p>
       </section>
 
       <section className="tile-grid" aria-label="Tools">
