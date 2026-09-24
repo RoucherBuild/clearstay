@@ -1,6 +1,6 @@
 import { RouteMeta } from '../components/RouteMeta'
+import { EU_EES_OVERVIEW } from '../lib/officialLinks'
 
-const OFFICIAL = 'https://travel-europe.europa.eu/ees_en'
 const ETIAS = 'https://travel-europe.europa.eu/etias_en'
 
 export function Ees() {
@@ -52,7 +52,7 @@ export function Ees() {
         </p>
         <ul className="link-list">
           <li>
-            <a href={OFFICIAL} target="_blank" rel="noopener noreferrer">
+            <a href={EU_EES_OVERVIEW} target="_blank" rel="noopener noreferrer">
               Official EES overview (travel-europe.europa.eu)
             </a>
           </li>

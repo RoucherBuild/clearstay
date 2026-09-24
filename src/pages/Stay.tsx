@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
 import { TermsGate } from '../components/TermsGate'
+import { EesCompanionCard } from '../components/EesCompanionCard'
 import {
   SCHENGEN_COUNTRIES,
   daysRemaining,
@@ -353,6 +354,8 @@ function StayCalculator() {
           </p>
         </section>
       )}
+
+      <EesCompanionCard />
     </>
   )
 }

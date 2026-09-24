@@ -669,3 +669,13 @@
 .estimate-note a {
   color: var(--horizon);
 }
+
+/* EES companion on Stay — warm paper card, no government styling */
+.ees-companion h2 {
+  color: var(--horizon);
+  margin-top: 0;
+}
+
+.ees-companion .link-list {
+  margin: 0.5rem 0 1rem;
+}
