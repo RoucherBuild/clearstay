@@ -4,6 +4,7 @@ import { useState } from 'react'
 const NAV = [
   { to: '/', label: 'Home', end: true },
   { to: '/stay', label: 'Stay' },
+  { to: '/outside', label: 'Outside' },
   { to: '/ees', label: 'EES' },
   { to: '/flights', label: 'Flights' },
   { to: '/bags', label: 'Bags' },

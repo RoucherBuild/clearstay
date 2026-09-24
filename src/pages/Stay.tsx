@@ -197,6 +197,11 @@ function StayCalculator() {
         {' — '}
         <span className="muted">passport, dates, EES queues (on this device)</span>
       </p>
+      <p className="prep-stay-link">
+        <NavLink to="/outside">Outside Schengen</NavLink>
+        {' — '}
+        <span className="muted">UK, Ireland, Cyprus, Balkans, Türkiye day counts (not 90/180)</span>
+      </p>
 
       <div className="toolbar">
         <button type="button" className="btn btn-secondary" onClick={loadSample}>

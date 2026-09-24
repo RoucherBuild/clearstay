@@ -46,6 +46,15 @@ export function Faq() {
           <Link to="/ees">EES</Link>.
         </p>
       </section>
+
+      <section className="qa-block">
+        <h2>Do UK / Ireland / Cyprus days count toward Schengen 90/180?</h2>
+        <p>
+          No. Track those separately on <Link to="/outside">Outside Schengen</Link>. That page
+          uses plain inclusive day counts — not the Schengen rolling window — and does not feed
+          the <Link to="/stay">Stay</Link> calculator.
+        </p>
+      </section>
     </>
   )
 }
