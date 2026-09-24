@@ -4,6 +4,7 @@ import { RouteMeta } from '../components/RouteMeta'
 import { TermsGate } from '../components/TermsGate'
 import { EesCompanionCard } from '../components/EesCompanionCard'
 import { StayTimeline } from '../components/StayTimeline'
+import { StayNextTripFit } from '../components/StayNextTripFit'
 import {
   SCHENGEN_COUNTRIES,
   daysRemaining,
@@ -139,6 +140,20 @@ function StayCalculator() {
   const removeTrip = (id: string) => {
     setTrips((prev) => prev.filter((t) => t.id !== id))
   }
+
+  const addProposedTrip = useCallback(
+    (proposed: { country: string; entry: string; exit: string; label?: string }) => {
+      const trip: Trip = {
+        id: newTripId(),
+        country: proposed.country,
+        entry: proposed.entry,
+        exit: proposed.exit,
+        ...(proposed.label?.trim() ? { label: proposed.label.trim() } : {}),
+      }
+      setTrips((prev) => [...prev, trip])
+    },
+    [],
+  )
 
   const loadSample = () => {
     setTrips([
@@ -354,6 +369,10 @@ function StayCalculator() {
             This is not permission to travel. Border officers and EES records control.
           </p>
         </section>
+      )}
+
+      {computed.ok && (
+        <StayNextTripFit trips={trips} asOf={asOf} onAddTrip={addProposedTrip} />
       )}
 
       {computed.ok && <StayTimeline trips={trips} asOf={asOf} />}
