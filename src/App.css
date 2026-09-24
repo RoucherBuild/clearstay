@@ -967,30 +967,3 @@
   margin: 0.65rem 0 0;
 }
 
-.outside-banner {
-  background: var(--under-bg);
-  border: 1px solid color-mix(in srgb, var(--horizon) 35%, var(--line));
-  border-left: 4px solid var(--horizon);
-  border-radius: 10px;
-  padding: 0.85rem 1rem;
-  margin: 1rem 0 1.25rem;
-}
-
-.outside-banner p {
-  margin: 0;
-}
-
-.outside-banner p + p {
-  margin-top: 0.45rem;
-}
-
-.zone-note {
-  margin-top: 0.85rem;
-  margin-bottom: 0.35rem;
-  color: var(--ink);
-  font-size: 0.95rem;
-}
-
-.result-line {
-  margin-bottom: 0.35rem;
-}

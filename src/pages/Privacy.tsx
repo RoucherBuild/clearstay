@@ -30,11 +30,6 @@ export function Privacy() {
           <code>localStorage</code> (<code>staywindow.prep.v1</code>) on this device only.
         </li>
         <li>
-          <strong>Outside Schengen stays.</strong> Non-Schengen day helpers store zone trips in{' '}
-          <code>localStorage</code> (<code>staywindow.nonSchengen.v1</code>) on this device only —
-          separate from Schengen trips.
-        </li>
-        <li>
           <strong>No analytics in v1.</strong> We do not load tracking scripts.
         </li>
         <li>

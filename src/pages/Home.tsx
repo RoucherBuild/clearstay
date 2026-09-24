@@ -34,10 +34,6 @@ export function Home() {
           <h2>Schengen stay</h2>
           <p>Rolling 90/180 day calculator with shareable trip list.</p>
         </Link>
-        <Link to="/outside" className="tile">
-          <h2>Outside Schengen</h2>
-          <p>UK, Ireland, Cyprus, Balkans, Türkiye — plain day counts, not 90/180.</p>
-        </Link>
         <Link to="/flights" className="tile">
           <h2>Flight delay</h2>
           <p>EU261 / UK261 compensation bands — estimate only.</p>
