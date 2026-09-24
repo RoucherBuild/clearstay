@@ -26,6 +26,10 @@ export function Privacy() {
           page URL so you can share a link.
         </li>
         <li>
+          <strong>Border prep checklist.</strong> Checked items on the prep page stay in{' '}
+          <code>localStorage</code> (<code>staywindow.prep.v1</code>) on this device only.
+        </li>
+        <li>
           <strong>No analytics in v1.</strong> We do not load tracking scripts.
         </li>
         <li>

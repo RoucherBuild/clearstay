@@ -9,6 +9,7 @@ const NAV = [
   { to: '/bags', label: 'Bags' },
   { to: '/photo', label: 'Photo' },
   { to: '/guide/90-180', label: '90/180' },
+  { to: '/prep', label: 'Prep' },
   { to: '/faq', label: 'FAQ' },
 ]
 

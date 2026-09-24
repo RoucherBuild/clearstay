@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
 import { TermsGate } from '../components/TermsGate'
 import { EesCompanionCard } from '../components/EesCompanionCard'
@@ -192,6 +192,12 @@ function StayCalculator() {
 
       <NationalityRulesStrip />
 
+      <p className="prep-stay-link">
+        <NavLink to="/prep">Border prep checklist</NavLink>
+        {' — '}
+        <span className="muted">passport, dates, EES queues (on this device)</span>
+      </p>
+
       <div className="toolbar">
         <button type="button" className="btn btn-secondary" onClick={loadSample}>
           Load sample data
@@ -381,6 +387,11 @@ function StayCalculator() {
       {computed.ok && <StayTimeline trips={trips} asOf={asOf} />}
 
       <EesCompanionCard />
+
+      <p className="prep-ees-link muted small">
+        Planning the border day?{' '}
+        <NavLink to="/prep">Border prep checklist</NavLink>
+      </p>
     </>
   )
 }
