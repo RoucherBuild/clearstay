@@ -7,6 +7,7 @@ import { Flights } from './pages/Flights'
 import { Bags } from './pages/Bags'
 import { Photo } from './pages/Photo'
 import { Guide90180 } from './pages/Guide90180'
+import { GuideSchengenCountries } from './pages/GuideSchengenCountries'
 import { Faq } from './pages/Faq'
 import { Prep } from './pages/Prep'
 import { About } from './pages/About'
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/bags" element={<Bags />} />
         <Route path="/photo" element={<Photo />} />
         <Route path="/guide/90-180" element={<Guide90180 />} />
+        <Route path="/guide/schengen-countries" element={<GuideSchengenCountries />} />
         <Route path="/prep" element={<Prep />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/about" element={<About />} />

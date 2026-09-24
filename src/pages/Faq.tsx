@@ -55,6 +55,16 @@ export function Faq() {
           <Link to="/stay">Stay</Link> calculator.
         </p>
       </section>
+
+      <section className="qa-block">
+        <h2>Which countries use my 90 Schengen days?</h2>
+        <p>
+          One shared pool across 29 Schengen countries. Ireland, Cyprus and the UK do not
+          count. See{' '}
+          <Link to="/guide/schengen-countries">Which countries count toward Schengen 90/180?</Link>
+          .
+        </p>
+      </section>
     </>
   )
 }

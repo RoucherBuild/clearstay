@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useState } from 'react'
+import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
 
 const NAV = [
   { to: '/', label: 'Home', end: true },
@@ -60,6 +61,15 @@ export function Layout() {
       </main>
 
       <footer className="site-footer">
+        <p className="footer-guides">
+          <NavLink to="/guide/90-180">90/180</NavLink>
+          {' · '}
+          <NavLink to="/guide/schengen-countries">Schengen countries</NavLink>
+          {' · '}
+          <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
+            EU short-stay calculator
+          </a>
+        </p>
         <p className="footer-disclaimer">
           Not official advice
           {' · '}

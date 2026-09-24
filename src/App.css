@@ -448,6 +448,31 @@
   margin-bottom: 1.25rem;
 }
 
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.95rem;
+}
+
+.guide-table th,
+.guide-table td {
+  border: 1px solid var(--line);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  color: var(--ink);
+  vertical-align: top;
+}
+
+.guide-table th {
+  background: var(--card);
+  font-weight: 650;
+}
+
+.footer-guides {
+  margin-bottom: 0.75rem;
+}
+
 .link-list {
   padding-left: 1.1rem;
 }

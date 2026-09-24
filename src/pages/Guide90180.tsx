@@ -46,6 +46,9 @@ export function Guide90180() {
           Time in places like Ireland, Cyprus, or the UK does not use Schengen days — but
           check each country’s own rules separately.
         </p>
+        <p>
+          <Link to="/guide/schengen-countries">Which countries are in Schengen?</Link>
+        </p>
       </section>
 
       <p>

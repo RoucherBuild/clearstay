@@ -188,6 +188,9 @@ function StayCalculator() {
       <p className="lede">
         Add entry/exit dates. Overlapping days count once. Non-Schengen countries contribute 0.
       </p>
+      <p>
+        <NavLink to="/guide/schengen-countries">Which countries count toward the 90 days?</NavLink>
+      </p>
       <p className="unofficial-line">Unofficial estimate — not the EU.</p>
 
       <NationalityRulesStrip />
