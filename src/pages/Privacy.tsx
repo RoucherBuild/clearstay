@@ -33,8 +33,9 @@ export function Privacy() {
           <strong>No analytics in v1.</strong> We do not load tracking scripts.
         </li>
         <li>
-          <strong>No photo upload to a server.</strong> Passport photo preview (if used) stays
-          in your browser via <code>createObjectURL</code>.
+          <strong>No photo upload to a server.</strong> Passport photo, stamp, and boarding-pass
+          previews (if used) stay in your browser via <code>createObjectURL</code> — images are
+          not sent to a server.
         </li>
         <li>
           <strong>Clearing data.</strong> Clear site data in your browser, or remove trips in the

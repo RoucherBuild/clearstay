@@ -540,6 +540,37 @@
   object-fit: cover;
 }
 
+.stamp-preview-img {
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.stamp-assist .field-error {
+  color: var(--over-fg);
+  background: var(--over-bg);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.92rem;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.stamp-assist .success-line {
+  color: var(--horizon);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.92rem;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.stamp-assist .btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 @media (min-width: 480px) {
   .cta-row {
     flex-direction: row;
