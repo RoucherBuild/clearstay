@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
 import { TermsGate } from '../components/TermsGate'
 import { EesCompanionCard } from '../components/EesCompanionCard'
+import { StayTimeline } from '../components/StayTimeline'
 import {
   SCHENGEN_COUNTRIES,
   daysRemaining,
@@ -354,6 +355,8 @@ function StayCalculator() {
           </p>
         </section>
       )}
+
+      {computed.ok && <StayTimeline trips={trips} asOf={asOf} />}
 
       <EesCompanionCard />
     </>

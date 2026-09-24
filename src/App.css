@@ -679,3 +679,111 @@
 .ees-companion .link-list {
   margin: 0.5rem 0 1rem;
 }
+
+
+/* Stay 180-day timeline — warm paper, mobile ~390px */
+.stay-timeline h2 {
+  color: var(--horizon);
+  margin-top: 0;
+}
+
+.stay-timeline-summary {
+  color: var(--mute);
+  font-size: 0.95rem;
+  margin: 0 0 0.85rem;
+}
+
+.stay-timeline-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+}
+
+.stay-timeline-month {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.4rem;
+  align-items: start;
+}
+
+.stay-timeline-month-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--mute);
+  line-height: 1.2;
+  padding-top: 0.1rem;
+}
+
+.stay-timeline-cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.stay-timeline-cell {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.stay-timeline-cell.is-used {
+  background: var(--horizon);
+}
+
+.stay-timeline-cell.is-free {
+  background: var(--line);
+}
+
+.stay-timeline-cell.is-asof {
+  outline: 2px solid var(--ink);
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px var(--card);
+}
+
+.stay-timeline-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+
+.stay-timeline-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stay-timeline-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.stay-timeline-swatch.is-used {
+  background: var(--horizon);
+}
+
+.stay-timeline-swatch.is-free {
+  background: var(--line);
+}
+
+.stay-timeline-swatch.is-asof {
+  background: var(--card);
+  outline: 2px solid var(--ink);
+  outline-offset: -1px;
+}
+
+@media (min-width: 480px) {
+  .stay-timeline-cell {
+    width: 9px;
+    height: 9px;
+  }
+}

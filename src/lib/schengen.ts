@@ -106,8 +106,10 @@ function assertValidTrip(trip: Trip): void {
  *
  * Iterates day-by-day via addDaysUtc (UTC calendar YMD), never local Date parse
  * of YYYY-MM-DD and never trips.length / duration clamp.
+ *
+ * This is the single day-collection path — daysUsed / enumerateUsedDays share it.
  */
-export function daysUsed(trips: Trip[], asOf: string): number {
+export function usedDaySet(trips: Trip[], asOf: string): Set<string> {
   const { start, end } = windowBounds(asOf)
   const days = new Set<string>()
 
@@ -128,7 +130,16 @@ export function daysUsed(trips: Trip[], asOf: string): number {
     }
   }
 
-  return days.size
+  return days
+}
+
+/** Sorted YYYY-MM-DD list of unique Schengen days in the window (same set as daysUsed). */
+export function enumerateUsedDays(trips: Trip[], asOf: string): string[] {
+  return [...usedDaySet(trips, asOf)].sort()
+}
+
+export function daysUsed(trips: Trip[], asOf: string): number {
+  return usedDaySet(trips, asOf).size
 }
 
 export function daysRemaining(trips: Trip[], asOf: string): number {

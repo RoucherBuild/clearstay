@@ -3,7 +3,9 @@ import {
   countDaysInclusive,
   daysRemaining,
   daysUsed,
+  enumerateUsedDays,
   status,
+  usedDaySet,
   windowBounds,
   type Trip,
 } from './schengen'
@@ -143,5 +145,39 @@ describe('tripsPersist encode/decode round-trip', () => {
     const decoded = decodeTripsFromSearch(bad)
     expect(decoded).not.toBeNull()
     expect(decoded!.trips).toHaveLength(0)
+  })
+})
+
+describe('enumerateUsedDays shares daysUsed path', () => {
+  it('size matches daysUsed for one-day and overlapping fixtures', () => {
+    const oneDay = [trip({ entry: '2026-03-10', exit: '2026-03-10', country: 'Spain' })]
+    expect(enumerateUsedDays(oneDay, '2026-03-10')).toHaveLength(daysUsed(oneDay, '2026-03-10'))
+    expect(usedDaySet(oneDay, '2026-03-10').size).toBe(daysUsed(oneDay, '2026-03-10'))
+
+    const overlapping = [
+      trip({ id: 'a', entry: '2026-03-01', exit: '2026-03-10', country: 'Italy' }),
+      trip({ id: 'b', entry: '2026-03-05', exit: '2026-03-08', country: 'Italy' }),
+    ]
+    expect(enumerateUsedDays(overlapping, '2026-03-10')).toHaveLength(
+      daysUsed(overlapping, '2026-03-10'),
+    )
+    expect(enumerateUsedDays(overlapping, '2026-03-10')).toEqual([
+      '2026-03-01',
+      '2026-03-02',
+      '2026-03-03',
+      '2026-03-04',
+      '2026-03-05',
+      '2026-03-06',
+      '2026-03-07',
+      '2026-03-08',
+      '2026-03-09',
+      '2026-03-10',
+    ])
+  })
+
+  it('size matches daysUsed for Ireland-only and empty list', () => {
+    const ireland = [trip({ entry: '2026-03-01', exit: '2026-03-20', country: 'Ireland' })]
+    expect(enumerateUsedDays(ireland, '2026-03-20')).toHaveLength(daysUsed(ireland, '2026-03-20'))
+    expect(enumerateUsedDays([], '2026-06-01')).toHaveLength(daysUsed([], '2026-06-01'))
   })
 })
