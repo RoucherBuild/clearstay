@@ -1,14 +1,66 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { RouteMeta } from '../components/RouteMeta'
-import { AIRLINE_BAGS, bagFits } from '../lib/bags'
+import {
+  AIRLINE_BAGS,
+  bagFits,
+  cmToIn,
+  formatAirlineDims,
+  formatBagWeight,
+  inToCm,
+  toCm,
+  type BagUnits,
+} from '../lib/bags'
 
 const DEFAULT_IDS = ['ryanair', 'easyjet', 'ba']
+const UNITS_KEY = 'staywindow.bagUnits'
+
+function readStoredUnits(): BagUnits {
+  try {
+    const v = localStorage.getItem(UNITS_KEY)
+    if (v === 'in' || v === 'cm') return v
+  } catch {
+    /* ignore */
+  }
+  return 'cm'
+}
+
+function convertDisplayTriple(
+  h: number,
+  w: number,
+  d: number,
+  from: BagUnits,
+  to: BagUnits,
+): [number, number, number] {
+  if (from === to) return [h, w, d]
+  if (from === 'cm' && to === 'in') {
+    return [cmToIn(h), cmToIn(w), cmToIn(d)]
+  }
+  return [inToCm(h), inToCm(w), inToCm(d)]
+}
 
 export function Bags() {
   const [selected, setSelected] = useState<string[]>(DEFAULT_IDS)
-  const [h, setH] = useState(55)
-  const [w, setW] = useState(40)
-  const [d, setD] = useState(20)
+  const [units, setUnits] = useState<BagUnits>(() => readStoredUnits())
+  const [h, setH] = useState(() => {
+    const u = readStoredUnits()
+    return u === 'in' ? cmToIn(55) : 55
+  })
+  const [w, setW] = useState(() => {
+    const u = readStoredUnits()
+    return u === 'in' ? cmToIn(40) : 40
+  })
+  const [d, setD] = useState(() => {
+    const u = readStoredUnits()
+    return u === 'in' ? cmToIn(20) : 20
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(UNITS_KEY, units)
+    } catch {
+      /* ignore */
+    }
+  }, [units])
 
   const compared = useMemo(
     () => AIRLINE_BAGS.filter((a) => selected.includes(a.id)).slice(0, 3),
@@ -23,7 +75,21 @@ export function Bags() {
     })
   }
 
-  const userDims: [number, number, number] = [h, w, d]
+  const switchUnits = (next: BagUnits) => {
+    if (next === units) return
+    const [nh, nw, nd] = convertDisplayTriple(h, w, d, units, next)
+    setH(nh)
+    setW(nw)
+    setD(nd)
+    setUnits(next)
+  }
+
+  const unitLabel = units === 'in' ? 'in' : 'cm'
+  const userCm: [number, number, number] = [
+    toCm(h, units),
+    toCm(w, units),
+    toCm(d, units),
+  ]
 
   return (
     <>
@@ -37,37 +103,62 @@ export function Bags() {
         fly.
       </p>
 
+      <div className="unit-toggle" role="group" aria-label="Measurement units">
+        <button
+          type="button"
+          className={units === 'cm' ? 'unit-btn active' : 'unit-btn'}
+          aria-pressed={units === 'cm'}
+          onClick={() => switchUnits('cm')}
+        >
+          cm
+        </button>
+        <button
+          type="button"
+          className={units === 'in' ? 'unit-btn active' : 'unit-btn'}
+          aria-pressed={units === 'in'}
+          onClick={() => switchUnits('in')}
+        >
+          in
+        </button>
+      </div>
+
       <section className="card form-card">
-        <h2>Your bag (cm)</h2>
+        <h2>Your bag ({unitLabel})</h2>
         <div className="form-grid three-col">
           <label className="field">
-            <span>Height (cm)</span>
+            <span>Height ({unitLabel})</span>
             <input
               type="number"
               min={1}
+              step="any"
               value={h}
               onChange={(e) => setH(Number(e.target.value))}
             />
           </label>
           <label className="field">
-            <span>Width (cm)</span>
+            <span>Width ({unitLabel})</span>
             <input
               type="number"
               min={1}
+              step="any"
               value={w}
               onChange={(e) => setW(Number(e.target.value))}
             />
           </label>
           <label className="field">
-            <span>Depth (cm)</span>
+            <span>Depth ({unitLabel})</span>
             <input
               type="number"
               min={1}
+              step="any"
               value={d}
               onChange={(e) => setD(Number(e.target.value))}
             />
           </label>
         </div>
+        <p className="muted small">
+          Compare in the units on your tape measure. Airline sites usually publish centimetres.
+        </p>
       </section>
 
       <section className="card">
@@ -89,16 +180,12 @@ export function Bags() {
 
       <section className="compare-grid" aria-label="Airline comparison">
         {compared.map((a) => {
-          const fit = bagFits(userDims, a)
+          const fit = bagFits(userCm, a)
           return (
             <article key={a.id} className="card compare-card">
               <h3>{a.name}</h3>
-              <p className="big-dims">
-                {a.maxCm[0]}×{a.maxCm[1]}×{a.maxCm[2]} cm
-              </p>
-              <p className="muted">
-                Weight: {a.maxKg != null ? `~${a.maxKg} kg` : 'not a fixed kg / check fare'}
-              </p>
+              <p className="big-dims">{formatAirlineDims(a.maxCm, units)}</p>
+              <p className="muted">Weight: {formatBagWeight(a.maxKg)}</p>
               <p className={fit ? 'fit-pass' : 'fit-fail'}>
                 {fit
                   ? 'Looks within published limit (check airline)'

@@ -169,26 +169,19 @@ export function status(trips: Trip[], asOf: string): StayStatus {
 }
 
 /**
- * Earliest date the traveller could enter and still have 90 days available
- * (daysRemaining === 90 on that as-of / entry date).
- * Returns null if they already have a full 90 remaining as of `asOf`.
+ * First calendar day on which the rolling window contains none of the listed
+ * Schengen days (daysUsed === 0), so a full 90-day stay is available again.
+ * - If daysUsed(trips, asOf) === 0, returns asOf.
+ * - Else walks asOf+1 for at most 180 calendar steps; returns the first D
+ *   with daysUsed === 0, or null if none.
  */
 export function nextFullStayDate(trips: Trip[], asOf: string): string | null {
-  if (daysRemaining(trips, asOf) === 90) return null
+  if (daysUsed(trips, asOf) === 0) return asOf
 
-  let maxExit = asOf
-  for (const trip of trips) {
-    assertValidTrip(trip)
-    if (!isSchengenCountry(trip.country)) continue
-    if (trip.exit > maxExit) maxExit = trip.exit
-  }
-
-  const limit = addDaysUtc(maxExit, 180)
   let d = addDaysUtc(asOf, 1)
-  while (d <= limit) {
-    if (daysRemaining(trips, d) === 90) return d
+  for (let i = 0; i < 180; i++) {
+    if (daysUsed(trips, d) === 0) return d
     d = addDaysUtc(d, 1)
   }
-
-  return addDaysUtc(maxExit, 180)
+  return null
 }

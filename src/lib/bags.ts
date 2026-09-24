@@ -129,3 +129,42 @@ export function bagFits(
   const m = [...airline.maxCm].map(Number).sort((a, b) => b - a)
   return u[0] <= m[0] && u[1] <= m[1] && u[2] <= m[2]
 }
+
+export type BagUnits = 'cm' | 'in'
+
+/** Convert centimetres to inches, one decimal place. */
+export function cmToIn(cm: number): number {
+  return Math.round((cm / 2.54) * 10) / 10
+}
+
+/**
+ * Convert inches to centimetres: one decimal, or integer when it lands on a whole cm.
+ */
+export function inToCm(inches: number): number {
+  const rounded = Math.round(inches * 2.54 * 10) / 10
+  return Number.isInteger(rounded) ? Math.trunc(rounded) : rounded
+}
+
+/** Convert a display dimension to cm for bagFits. */
+export function toCm(value: number, units: BagUnits): number {
+  return units === 'in' ? value * 2.54 : value
+}
+
+/** Format airline published dims for the current unit mode. */
+export function formatAirlineDims(
+  maxCm: [number, number, number],
+  units: BagUnits,
+): string {
+  if (units === 'cm') {
+    return `${maxCm[0]}×${maxCm[1]}×${maxCm[2]} cm`
+  }
+  const [h, w, d] = maxCm.map(cmToIn) as [number, number, number]
+  return `${h} × ${w} × ${d} in  (${maxCm[0]} × ${maxCm[1]} × ${maxCm[2]} cm)`
+}
+
+/** Weight line: kg with approx lb, or the fixed null wording. */
+export function formatBagWeight(maxKg: number | null): string {
+  if (maxKg == null) return 'not a fixed kg / check fare'
+  const lb = Math.round(maxKg * 2.20462)
+  return `~${maxKg} kg ≈ ${lb} lb`
+}

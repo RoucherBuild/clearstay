@@ -1,57 +1,132 @@
-import { NavLink, Outlet } from 'react-router-dom'
-import { useState } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
 
-const NAV = [
-  { to: '/', label: 'Home', end: true },
+const PRIMARY = [
   { to: '/stay', label: 'Stay' },
-  { to: '/ees', label: 'EES' },
   { to: '/flights', label: 'Flights' },
   { to: '/bags', label: 'Bags' },
+] as const
+
+const MORE_LINKS = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/ees', label: 'EES' },
   { to: '/photo', label: 'Photo' },
   { to: '/guide/90-180', label: '90/180' },
+  { to: '/guide/schengen-countries', label: 'Schengen countries' },
   { to: '/prep', label: 'Prep' },
   { to: '/faq', label: 'FAQ' },
-]
+  { to: '/about', label: 'About' },
+  { to: '/terms', label: 'Terms' },
+] as const
+
+function moreIsActive(pathname: string): boolean {
+  if (pathname === '/' || pathname === '/privacy') return true
+  if (pathname.startsWith('/guide/')) return true
+  return (
+    pathname === '/ees' ||
+    pathname === '/prep' ||
+    pathname === '/faq' ||
+    pathname === '/about' ||
+    pathname === '/terms' ||
+    pathname === '/photo'
+  )
+}
 
 export function Layout() {
-  const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreWrapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setMoreOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!moreOpen) return
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMoreOpen(false)
+    }
+    const onPointer = (e: MouseEvent | TouchEvent) => {
+      const el = moreWrapRef.current
+      if (el && e.target instanceof Node && !el.contains(e.target)) {
+        setMoreOpen(false)
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onPointer)
+    document.addEventListener('touchstart', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onPointer)
+      document.removeEventListener('touchstart', onPointer)
+    }
+  }, [moreOpen])
+
+  const moreActive = moreIsActive(location.pathname)
 
   return (
     <div className="shell">
       <header className="site-header">
         <div className="header-inner">
-          <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
+          <NavLink to="/" className="brand" onClick={() => setMoreOpen(false)}>
             Staywindow
           </NavLink>
-          <button
-            type="button"
-            className="nav-toggle"
-            aria-expanded={open}
-            aria-controls="site-nav"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? 'Close' : 'Menu'}
-          </button>
-          <nav id="site-nav" className={open ? 'site-nav open' : 'site-nav'}>
-            {NAV.map((item) => (
+          <nav className="site-nav" aria-label="Primary">
+            {PRIMARY.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                end={item.end}
                 className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-                onClick={() => setOpen(false)}
               >
                 {item.label}
               </NavLink>
             ))}
-            <NavLink
-              to="/about"
-              className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-              onClick={() => setOpen(false)}
-            >
-              About
-            </NavLink>
+            <div className="nav-more" ref={moreWrapRef}>
+              <button
+                type="button"
+                className={
+                  moreOpen || moreActive ? 'nav-link nav-more-btn active' : 'nav-link nav-more-btn'
+                }
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                aria-controls="more-panel"
+                id="more-trigger"
+                onClick={() => setMoreOpen((v) => !v)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setMoreOpen((v) => !v)
+                  }
+                }}
+              >
+                More
+              </button>
+              {moreOpen && (
+                <div
+                  id="more-panel"
+                  className="more-panel"
+                  role="menu"
+                  aria-labelledby="more-trigger"
+                >
+                  {MORE_LINKS.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      end={'end' in item ? item.end : undefined}
+                      role="menuitem"
+                      className={({ isActive }) =>
+                        isActive ? 'more-link active' : 'more-link'
+                      }
+                      onClick={() => setMoreOpen(false)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
         </div>
       </header>

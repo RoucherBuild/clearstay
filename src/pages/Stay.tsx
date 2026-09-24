@@ -45,6 +45,19 @@ function statusLabel(s: 'Safe' | 'Tight' | 'Over'): string {
   return 'Over (estimate)'
 }
 
+/** Format YYYY-MM-DD as a locale long date in UTC (date-only). */
+function formatNextFullDate(ymd: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd)
+  if (!m) return ymd
+  const dt = new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]), 12, 0, 0))
+  return dt.toLocaleDateString(undefined, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+}
+
 function emptyDraft(): Omit<Trip, 'id'> {
   return {
     country: 'Spain',
@@ -82,6 +95,7 @@ function StayCalculator() {
   const [asOf, setAsOf] = useState(todayYmd())
   const [draft, setDraft] = useState(emptyDraft)
   const [hydrated, setHydrated] = useState(false)
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
 
   useEffect(() => {
     const fromUrl = decodeTripsFromSearch(location.search)
@@ -141,6 +155,22 @@ function StayCalculator() {
   const removeTrip = (id: string) => {
     setTrips((prev) => prev.filter((t) => t.id !== id))
   }
+
+  const copyEstimate = useCallback(async () => {
+    const search = encodeTripsToSearch(trips, asOf)
+    const current = location.search || ''
+    if (search !== current) {
+      navigate({ pathname: '/stay', search }, { replace: true })
+    }
+    const url = `${window.location.origin}/stay${search}`
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopyState('copied')
+      window.setTimeout(() => setCopyState('idle'), 2000)
+    } catch {
+      setCopyState('failed')
+    }
+  }, [trips, asOf, navigate, location.search])
 
   const addProposedTrip = useCallback(
     (proposed: { country: string; entry: string; exit: string; label?: string }) => {
@@ -330,6 +360,14 @@ function StayCalculator() {
             <span className="hero-remaining">{computed.remaining}</span>
             <span className="hero-remaining-label">days remaining</span>
           </div>
+          <div className="copy-estimate-row">
+            <button type="button" className="btn btn-secondary btn-small" onClick={copyEstimate}>
+              {copyState === 'copied' ? 'Copied' : 'Copy this estimate'}
+            </button>
+            {copyState === 'failed' && (
+              <span className="muted small">Select the address bar and copy</span>
+            )}
+          </div>
           <p className="estimate-note">
             Estimate only. Confirm with the{' '}
             <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
@@ -368,13 +406,19 @@ function StayCalculator() {
             <strong>180-day window:</strong> {computed.bounds.start} → {computed.bounds.end}
           </p>
 
-          {computed.nextFull && (
-            <p>
-              <strong>Next full 90-day stay available from:</strong> {computed.nextFull}
-            </p>
-          )}
-          {!computed.nextFull && computed.remaining === 90 && (
-            <p className="muted">You currently have a full 90 days remaining.</p>
+          {trips.length >= 1 && (
+            <div className="next-full-block">
+              <p>
+                <strong>Next full 90-day stay available from:</strong>{' '}
+                {computed.nextFull
+                  ? formatNextFullDate(computed.nextFull)
+                  : 'after the last listed trip leaves the 180-day window (estimate)'}
+              </p>
+              <p className="muted small">
+                This is the first day the rolling window no longer contains any of your listed
+                Schengen days (estimate).
+              </p>
+            </div>
           )}
 
           <p className="disclaimer">
