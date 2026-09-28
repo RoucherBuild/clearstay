@@ -10,15 +10,16 @@ export function Terms() {
         path="/terms"
       />
       <h1>Terms of Use</h1>
-      <p className="lede">Last updated 21 September 2026.</p>
+      <p className="lede">Last updated 27 September 2026.</p>
 
       <section className="card">
         <h2>What this site is</h2>
         <p>
-          Staywindow provides independent, unofficial estimates for travel planning. It is not
-          the EU, not an airline, not a law firm, and not a claim company. The site is also
-          available on this Pages.dev host and any custom domain we attach; these terms cover
-          all of them.
+          Staywindow provides independent, unofficial estimates for travel planning at{' '}
+          <a href="https://thestaywindow.com/">https://thestaywindow.com</a>. It is not the
+          EU, not an airline, not a law firm, and not a claim company. These terms apply to{' '}
+          <a href="https://thestaywindow.com/">https://thestaywindow.com</a> and to any other
+          hostname we use to serve the same tools, including preview or legacy hosts.
         </p>
       </section>
 
