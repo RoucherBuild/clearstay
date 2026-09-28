@@ -260,12 +260,6 @@ function StayCalculator() {
 
       <NationalityRulesStrip />
 
-      <p className="prep-stay-link">
-        <NavLink to="/prep">Border prep checklist</NavLink>
-        {' — '}
-        <span className="muted">passport, dates, EES queues (on this device)</span>
-      </p>
-
       <div className="toolbar">
         <button type="button" className="btn btn-secondary" onClick={loadSample}>
           Load sample data
