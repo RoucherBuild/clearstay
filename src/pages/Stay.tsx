@@ -74,10 +74,10 @@ export function Stay() {
     return (
       <>
         <RouteMeta
-          title="Schengen stay calculator — Staywindow"
-          description="Add trips and see days used and remaining in the rolling 180-day Schengen window. Data stays on this device."
+          title="Schengen 90/180 calculator — days left (estimate) | Staywindow"
+          description="Count Schengen days on the rolling 180-day window. Inclusive days, shareable URL, on-device only. Confirm with the official EU calculator."
         />
-        <h1>Schengen stay calculator</h1>
+        <h1>Schengen 90/180 calculator</h1>
         <TermsGate onAccepted={() => setAccepted(true)} />
         <p className="unofficial-line">Unofficial estimate — not the EU.</p>
       </>
@@ -211,17 +211,52 @@ function StayCalculator() {
   return (
     <>
       <RouteMeta
-        title="Schengen stay calculator — Staywindow"
-        description="Add trips and see days used and remaining in the rolling 180-day Schengen window. Data stays on this device."
+        title="Schengen 90/180 calculator — days left (estimate) | Staywindow"
+        description="Count Schengen days on the rolling 180-day window. Inclusive days, shareable URL, on-device only. Confirm with the official EU calculator."
       />
-      <h1>Schengen stay calculator</h1>
+      <h1>Schengen 90/180 calculator</h1>
       <p className="lede">
-        Add entry/exit dates. Overlapping days count once. Non-Schengen countries contribute 0.
+        Unofficial estimate of days used and left in the usual Schengen 90/180 short-stay window.
+        Add entry/exit dates — overlapping days count once; non-Schengen countries contribute 0.
       </p>
       <p>
         <NavLink to="/guide/schengen-countries">Which countries count toward the 90 days?</NavLink>
       </p>
       <p className="unofficial-line">Unofficial estimate — not the EU.</p>
+
+      <section className="qa-block stay-explainer">
+        <h2>How this estimate works</h2>
+        <p>
+          This is an unofficial estimate of how the usual Schengen short-stay cap works: up to 90
+          days in any rolling 180-day period for visa-free short stays (rules vary by nationality —
+          check yours).
+        </p>
+        <p>
+          <strong>How Staywindow counts (estimate):</strong> entry day and exit day both count;
+          overlapping trips share a day once; the window moves with your as-of date; your trip
+          list stays on this device unless you share the URL.
+        </p>
+        <p>
+          <strong>What this is not:</strong> not the EU, not EES, not a visa service, and not a
+          promise you will be allowed to enter. Border decisions are always the state’s.
+        </p>
+        <p>
+          Before you rely on a number, run the same trips through the{' '}
+          <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
+            official EU short-stay calculator
+          </a>{' '}
+          and read the Commission’s short-stay guidance. If something looks off, trust the
+          official tool.
+        </p>
+        <p>
+          Related:{' '}
+          <NavLink to="/guide/90-180">How 90/180 works</NavLink>
+          {' · '}
+          <NavLink to="/guide/schengen-countries">Schengen countries list</NavLink>
+          {' · '}
+          <NavLink to="/prep">Border prep checklist</NavLink>
+        </p>
+      </section>
 
       <NationalityRulesStrip />
 

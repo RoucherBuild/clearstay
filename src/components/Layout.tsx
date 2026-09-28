@@ -14,6 +14,9 @@ const MORE_LINKS = [
   { to: '/photo', label: 'Photo' },
   { to: '/guide/90-180', label: '90/180' },
   { to: '/guide/schengen-countries', label: 'Schengen countries' },
+  { to: '/guide/layover-schengen-days', label: 'Layover / Schengen days' },
+  { to: '/guide/ireland-uk-schengen', label: 'Ireland, UK & Schengen' },
+  { to: '/guide/when-schengen-days-reset', label: 'When days come back' },
   { to: '/prep', label: 'Prep' },
   { to: '/faq', label: 'FAQ' },
   { to: '/about', label: 'About' },
@@ -140,6 +143,12 @@ export function Layout() {
           <NavLink to="/guide/90-180">90/180</NavLink>
           {' · '}
           <NavLink to="/guide/schengen-countries">Schengen countries</NavLink>
+          {' · '}
+          <NavLink to="/guide/layover-schengen-days">Layover</NavLink>
+          {' · '}
+          <NavLink to="/guide/ireland-uk-schengen">Ireland &amp; UK</NavLink>
+          {' · '}
+          <NavLink to="/guide/when-schengen-days-reset">When days come back</NavLink>
           {' · '}
           <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
             EU short-stay calculator

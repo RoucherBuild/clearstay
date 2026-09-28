@@ -11,3 +11,11 @@ export const EU_EES_STAY_CHECKER =
 
 /** Official ETIAS overview (travel-europe.europa.eu). */
 export const EU_ETIAS = 'https://travel-europe.europa.eu/en/etias'
+
+/** UK CAA — passenger rights for flight delays. */
+export const UK_CAA_PASSENGER_DELAYS =
+  'https://www.caa.co.uk/passengers-and-public/resolving-travel-problems/delays-and-cancellations/delays'
+
+/** EU Your Europe — air passenger rights overview. */
+export const EU_AIR_PASSENGER_RIGHTS =
+  'https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm'
