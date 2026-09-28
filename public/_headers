@@ -1,0 +1,5 @@
+# Path-based headers only (Cloudflare Pages does not match on Host here).
+# Preview hosts (*.pages.dev) get noindex,nofollow via RouteMeta client-side.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

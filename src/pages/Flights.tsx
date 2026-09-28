@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
+import { Link } from 'react-router-dom'
+import { EU_AIR_PASSENGER_RIGHTS, UK_CAA_PASSENGER_DELAYS } from '../lib/officialLinks'
 import { TermsGate } from '../components/TermsGate'
 import {
   AIRPORTS,
@@ -12,6 +15,26 @@ import {
 } from '../lib/airports'
 import { hasAcceptedTerms } from '../lib/termsGate'
 
+
+const FLIGHTS_FAQS = [
+  {
+    q: 'What are EU261 3 hour and 4 hour compensation bands?',
+    a: 'EU261-style rules often discuss delay thresholds around three hours at arrival, with money bands that depend on distance. This tool shows rough bands only — not a determination that money is owed.',
+  },
+  {
+    q: 'Does Staywindow file delay claims?',
+    a: 'No. We show rough EU261 / UK261 money bands only. We are not a claim company and we do not file claims.',
+  },
+  {
+    q: 'Are the euro and pound figures guarantees?',
+    a: 'No. They are estimate bands. Eligibility depends on operating carrier, route, delay cause, extraordinary circumstances, and tickets.',
+  },
+  {
+    q: 'Do US domestic flights use these bands?',
+    a: 'US domestic itineraries are outside this EU261 / UK261-style band tool. The page will say so when both airports are US domestic.',
+  },
+]
+
 type CarrierType = 'eu_uk' | 'other'
 type BandChoice = DistanceBand | 'auto'
 
@@ -22,8 +45,11 @@ export function Flights() {
     return (
       <div className="flights-page">
         <RouteMeta
-          title="Flight delay compensation bands — Staywindow"
-          description="Rough EU261 / UK261 delay compensation money bands by distance. Not a claim company — estimate only."
+          title="EU261 and UK261 delay compensation bands"
+          description="Rough EU261 / UK261 delay compensation bands for 3-hour and longer delays by distance. Estimate only — Staywindow does not file claims."
+          path="/flights"
+          faqs={FLIGHTS_FAQS}
+          webApp
         />
         <h1>Flight delay compensation bands</h1>
         <TermsGate onAccepted={() => setAccepted(true)} />
@@ -72,14 +98,41 @@ function FlightsCalculator() {
   return (
     <div className="flights-page">
       <RouteMeta
-        title="Flight delay compensation bands — Staywindow"
-        description="Rough EU261 / UK261 delay compensation money bands by distance. Not a claim company — estimate only."
+        title="EU261 and UK261 delay compensation bands"
+        description="Rough EU261 / UK261 delay compensation bands for 3-hour and longer delays by distance. Estimate only — Staywindow does not file claims."
+        path="/flights"
+        faqs={FLIGHTS_FAQS}
+        webApp
       />
       <h1>Flight delay compensation bands</h1>
       <p className="lede">
         Rough EU261 / UK261 <strong>money bands</strong> only — not legal advice and not a claim
         filing service. We do not file claims.
       </p>
+
+      <section className="qa-block stay-explainer">
+        <h2>EU261 3 hour and 4 hour compensation bands (estimate)</h2>
+        <p>
+          Passengers often search for “EU261 3 hour” or “4 hour compensation” after a long delay
+          at arrival. EU261-style and UK261-style frameworks discuss delay thresholds (commonly
+          from about three hours) and distance-based money bands. This page helps you see which
+          rough band might apply for planning — not whether the airline owes you money.
+        </p>
+        <p>
+          Extraordinary circumstances, operating carrier, tickets, and route details can remove or
+          change eligibility. Staywindow never files claims and never guarantees payment. Read
+          official summaries on{' '}
+          <a href={EU_AIR_PASSENGER_RIGHTS} target="_blank" rel="noopener noreferrer">
+            EU air passenger rights
+          </a>{' '}
+          and{' '}
+          <a href={UK_CAA_PASSENGER_DELAYS} target="_blank" rel="noopener noreferrer">
+            UK CAA delay guidance
+          </a>
+          . Worked example:{' '}
+          <Link to="/flights/eu261-jfk-lhr">EU261 JFK–LHR example</Link>.
+        </p>
+      </section>
 
       <section className="card form-card">
         <div className="form-grid">
@@ -237,6 +290,8 @@ function FlightsCalculator() {
           an adviser.
         </p>
       </section>
+
+      <FaqDetails faqs={FLIGHTS_FAQS} />
     </div>
   )
 }

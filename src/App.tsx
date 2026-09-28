@@ -8,8 +8,14 @@ import { Bags } from './pages/Bags'
 import { Photo } from './pages/Photo'
 import { Guide90180 } from './pages/Guide90180'
 import { GuideSchengenCountries } from './pages/GuideSchengenCountries'
+import { GuideLayoverSchengen } from './pages/GuideLayoverSchengen'
 import { GuideLayoverSchengenDays } from './pages/GuideLayoverSchengenDays'
+import { GuideIrelandSchengen } from './pages/GuideIrelandSchengen'
 import { GuideIrelandUkSchengen } from './pages/GuideIrelandUkSchengen'
+import { GuideCyprusSchengen } from './pages/GuideCyprusSchengen'
+import { GuideUsPassport90180 } from './pages/GuideUsPassport90180'
+import { GuideUkPassport90180 } from './pages/GuideUkPassport90180'
+import { GuideWhenDaysReset } from './pages/GuideWhenDaysReset'
 import { GuideWhenSchengenDaysReset } from './pages/GuideWhenSchengenDaysReset'
 import { BagsRyanairVsUnited } from './pages/BagsRyanairVsUnited'
 import { FlightsEu261JfkLhr } from './pages/FlightsEu261JfkLhr'
@@ -34,6 +40,13 @@ export default function App() {
         <Route path="/photo" element={<Photo />} />
         <Route path="/guide/90-180" element={<Guide90180 />} />
         <Route path="/guide/schengen-countries" element={<GuideSchengenCountries />} />
+        <Route path="/guide/layover-schengen" element={<GuideLayoverSchengen />} />
+        <Route path="/guide/ireland-schengen" element={<GuideIrelandSchengen />} />
+        <Route path="/guide/cyprus-schengen" element={<GuideCyprusSchengen />} />
+        <Route path="/guide/us-passport-90-180" element={<GuideUsPassport90180 />} />
+        <Route path="/guide/uk-passport-90-180" element={<GuideUkPassport90180 />} />
+        <Route path="/guide/when-days-reset" element={<GuideWhenDaysReset />} />
+        {/* Old slugs → new (also 301 in public/_redirects) */}
         <Route path="/guide/layover-schengen-days" element={<GuideLayoverSchengenDays />} />
         <Route path="/guide/ireland-uk-schengen" element={<GuideIrelandUkSchengen />} />
         <Route path="/guide/when-schengen-days-reset" element={<GuideWhenSchengenDaysReset />} />

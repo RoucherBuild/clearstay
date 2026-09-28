@@ -1088,3 +1088,42 @@
 .next-full-block {
   margin: 0.75rem 0;
 }
+
+/* SEO / FAQ discoverability */
+.faq-details-block {
+  margin-top: 1.5rem;
+}
+
+.faq-details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  margin: 0.5rem 0;
+  background: var(--paper);
+}
+
+.faq-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.faq-details p {
+  margin: 0.55rem 0 0.15rem;
+  color: var(--mute);
+}
+
+.unofficial-planner-note {
+  font-size: 0.85rem;
+  color: var(--mute);
+  margin: 0.75rem 0;
+}
+
+.home-spoke-links {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.home-spoke-links a {
+  color: var(--horizon);
+}

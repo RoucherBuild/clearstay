@@ -11,6 +11,7 @@ export function FlightsEu261JfkLhr() {
       <RouteMeta
         title="EU261 delay bands: JFK–LHR example (estimate only) | Staywindow"
         description="Rough EU261 / UK261 compensation bands for a sample long delay. We do not file claims. Confirm CAA / official passenger-rights pages."
+        path="/flights/eu261-jfk-lhr"
       />
       <h1>EU261 delay bands: JFK–LHR example (estimate only)</h1>
       <p className="lede">

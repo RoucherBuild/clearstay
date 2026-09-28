@@ -7,6 +7,7 @@ export function About() {
       <RouteMeta
         title="About — Staywindow"
         description="Staywindow is a calm travel-utility site for Schengen day counting and related trip tools. Not official advice."
+        path="/about"
       />
       <h1>About Staywindow</h1>
       <p className="lede">
@@ -25,8 +26,11 @@ export function About() {
         not a visa shop, and not a claim company.
       </p>
       <p>
-        Start with the <Link to="/stay">stay calculator</Link> or read the{' '}
-        <Link to="/guide/90-180">90/180 guide</Link>.
+        Start with the <Link to="/stay">stay calculator</Link> or read{' '}
+        <Link to="/guide/90-180">90/180 explained</Link>,{' '}
+        <Link to="/guide/schengen-countries">countries that count</Link>,{' '}
+        <Link to="/guide/ireland-schengen">Ireland</Link>, or{' '}
+        <Link to="/guide/when-days-reset">when days come back</Link>.
       </p>
     </>
   )

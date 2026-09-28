@@ -7,6 +7,7 @@ export function Terms() {
       <RouteMeta
         title="Terms of Use — Staywindow"
         description="Staywindow terms of use: unofficial estimates provided as is, not legal advice, not a government or airline site."
+        path="/terms"
       />
       <h1>Terms of Use</h1>
       <p className="lede">Last updated 21 September 2026.</p>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
 import { TermsGate } from '../components/TermsGate'
 import { EesCompanionCard } from '../components/EesCompanionCard'
 import { NationalityRulesStrip } from '../components/NationalityRulesStrip'
@@ -34,6 +35,29 @@ const EXTRA_COUNTRIES = [
   'Canada',
   'Australia',
   'Other / non-Schengen',
+]
+
+const STAY_FAQS = [
+  {
+    q: 'Is Staywindow the official EU Schengen calculator?',
+    a: 'No. Staywindow is an unofficial on-device estimate. Confirm with the official EU short-stay calculator before you travel.',
+  },
+  {
+    q: 'Do entry and exit days both count?',
+    a: 'Yes. Under the usual short-stay approach both the entry day and the exit day normally count as days present.',
+  },
+  {
+    q: 'Is it one pool across Schengen countries?',
+    a: 'Yes. The usual visa-free short-stay cap is one shared 90-day pool across the Schengen area, not 90 days per country.',
+  },
+  {
+    q: 'What does the as-of date mean?',
+    a: 'It is the check date. The rolling 180-day look-back ends on that date. Change it and the days inside the window can change.',
+  },
+  {
+    q: 'Do overlapping trips double-count a day?',
+    a: 'No. If two Schengen stays share a calendar day, Staywindow counts that day once (estimate).',
+  },
 ]
 
 const SCHENGEN_SET = new Set<string>(SCHENGEN_COUNTRIES)
@@ -74,10 +98,13 @@ export function Stay() {
     return (
       <>
         <RouteMeta
-          title="Schengen 90/180 calculator — days left (estimate) | Staywindow"
-          description="Count Schengen days on the rolling 180-day window. Inclusive days, shareable URL, on-device only. Confirm with the official EU calculator."
+          title="Schengen 90/180 calculator (unofficial)"
+          description="Unofficial Schengen 90/180 calculator: one pool across 29 countries; entry and exit count. Confirm with the official EU short-stay calculator."
+          path="/stay"
+          faqs={STAY_FAQS}
+          webApp
         />
-        <h1>Schengen 90/180 calculator</h1>
+        <h1>Schengen 90/180 day calculator</h1>
         <TermsGate onAccepted={() => setAccepted(true)} />
         <p className="unofficial-line">Unofficial estimate — not the EU.</p>
       </>
@@ -211,10 +238,13 @@ function StayCalculator() {
   return (
     <>
       <RouteMeta
-        title="Schengen 90/180 calculator — days left (estimate) | Staywindow"
-        description="Count Schengen days on the rolling 180-day window. Inclusive days, shareable URL, on-device only. Confirm with the official EU calculator."
+        title="Schengen 90/180 calculator (unofficial)"
+        description="Unofficial Schengen 90/180 calculator: one pool across 29 countries; entry and exit count. Confirm with the official EU short-stay calculator."
+        path="/stay"
+        faqs={STAY_FAQS}
+        webApp
       />
-      <h1>Schengen 90/180 calculator</h1>
+      <h1>Schengen 90/180 day calculator</h1>
       <p className="lede">
         Unofficial estimate of days used and left in the usual Schengen 90/180 short-stay window.
         Add entry/exit dates — overlapping days count once; non-Schengen countries contribute 0.
@@ -225,16 +255,27 @@ function StayCalculator() {
       <p className="unofficial-line">Unofficial estimate — not the EU.</p>
 
       <section className="qa-block stay-explainer">
-        <h2>How this estimate works</h2>
+        <h2>Schengen 90/180 calculator for US and other visa-free passports</h2>
         <p>
-          This is an unofficial estimate of how the usual Schengen short-stay cap works: up to 90
-          days in any rolling 180-day period for visa-free short stays (rules vary by nationality —
-          check yours).
+          This page is an unofficial Schengen 90/180 day calculator. For many visa-free travellers
+          — including typical US passport short stays — presence in the Schengen area is limited to
+          90 days in any rolling 180-day period. That allowance is one shared pool across the{' '}
+          <NavLink to="/guide/schengen-countries">29 countries that count</NavLink>, not 90 days
+          per country. Iceland, Liechtenstein, Norway, and Switzerland count; Ireland, Cyprus, and
+          the UK do not.
         </p>
         <p>
           <strong>How Staywindow counts (estimate):</strong> entry day and exit day both count;
-          overlapping trips share a day once; the window moves with your as-of date; your trip
-          list stays on this device unless you share the URL.
+          overlapping trips share a calendar day once; the 180-day look-back ends on your as-of
+          (check) date; the modern rolling methodology people cite has applied since 18 October
+          2013. Your trip list stays on this device unless you share the URL.
+        </p>
+        <p>
+          Leaving the area does not reset the clock. Days come back when they fall outside the
+          look-back — see <NavLink to="/guide/when-days-reset">when days come back</NavLink> and{' '}
+          <NavLink to="/guide/90-180">how 90/180 is counted</NavLink>. Passport notes:{' '}
+          <NavLink to="/guide/us-passport-90-180">US</NavLink>,{' '}
+          <NavLink to="/guide/uk-passport-90-180">UK</NavLink>.
         </p>
         <p>
           <strong>What this is not:</strong> not the EU, not EES, not a visa service, and not a
@@ -245,8 +286,7 @@ function StayCalculator() {
           <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
             official EU short-stay calculator
           </a>{' '}
-          and read the Commission’s short-stay guidance. If something looks off, trust the
-          official tool.
+          and read the Commission’s short-stay guidance. If something looks off, trust the official EU short-stay calculator.
         </p>
         <p>
           Related:{' '}
@@ -463,6 +503,8 @@ function StayCalculator() {
       {computed.ok && <StayTimeline trips={trips} asOf={asOf} />}
 
       <EesCompanionCard />
+
+      <FaqDetails faqs={STAY_FAQS} />
 
       <p className="prep-ees-link muted small">
         Planning the border day?{' '}

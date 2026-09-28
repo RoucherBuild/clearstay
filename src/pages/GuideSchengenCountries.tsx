@@ -1,24 +1,46 @@
 import { Link } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
 import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
+
+const FAQS = [
+  {
+    q: 'Which countries count toward Schengen 90/180?',
+    a: 'Twenty-nine Schengen members share one pool. Iceland, Liechtenstein, Norway, and Switzerland count even though they are not in the EU. Ireland, Cyprus, and the UK do not count toward the pool.',
+  },
+  {
+    q: 'Does Ireland count?',
+    a: 'No. EU member, not Schengen. Days there do not use or restore the 90.',
+  },
+  {
+    q: 'Does Cyprus count?',
+    a: 'No — not while internal Schengen borders are not abolished. Track Cyprus separately.',
+  },
+  {
+    q: 'Do Norway and Switzerland count?',
+    a: 'Yes. They are Schengen members outside the EU and use the same shared 90-day pool.',
+  },
+]
 
 export function GuideSchengenCountries() {
   return (
     <>
       <RouteMeta
-        title="Schengen countries list (and who’s outside) | Staywindow"
-        description="Which countries share the 90/180 pool — and common mix-ups like Ireland, the UK, and Cyprus. Unofficial guide; confirm official sources."
+        title="Which countries count toward Schengen 90/180"
+        description="29 Schengen members share one 90/180 pool. Ireland, Cyprus, UK do not count; IS/LI/NO/CH do. Unofficial list — confirm official sources."
+        path="/guide/schengen-countries"
+        faqs={FAQS}
       />
-      <h1>Schengen countries list (and who’s outside)</h1>
-      <p className="lede">
-        People ask whether a country uses the shared short-stay 90/180 pool. This page is an
-        unofficial planning list. Membership and border rules change — confirm on European
-        Commission / home-affairs pages.
-      </p>
+      <h1>Which countries count toward Schengen 90/180</h1>
       <p className="lede">
         Visa-free short stays use one shared allowance: 90 days in any rolling 180-day window,
-        across the whole Schengen Area — not 90 days per country. If you spend 20 days in Spain
-        and 20 in Norway, that is 40 days used, not two separate pots.
+        across the whole Schengen Area — not 90 days per country. This page is an unofficial
+        planning list. Membership and border rules change — confirm on European Commission /
+        home-affairs pages and the{' '}
+        <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
+          official EU short-stay calculator
+        </a>
+        .
       </p>
 
       <section className="qa-block">
@@ -53,12 +75,16 @@ export function GuideSchengenCountries() {
           </thead>
           <tbody>
             <tr>
-              <td>Ireland</td>
+              <td>
+                <Link to="/guide/ireland-schengen">Ireland</Link>
+              </td>
               <td>Yes</td>
               <td>No</td>
             </tr>
             <tr>
-              <td>Cyprus</td>
+              <td>
+                <Link to="/guide/cyprus-schengen">Cyprus</Link>
+              </td>
               <td>Yes</td>
               <td>No</td>
             </tr>
@@ -77,11 +103,9 @@ export function GuideSchengenCountries() {
         <p>
           Days in Ireland, Cyprus, or the UK do not pause or reset the Schengen clock. They
           simply do not add to the 90. Those places have their own stay rules — check those
-          separately. See also{' '}
-          <Link to="/guide/ireland-uk-schengen">Ireland, the UK, and Schengen days</Link>.
-        </p>
-        <p>
-          Many non-EU destinations labelled “Europe” in brochures are also outside this pool.
+          separately. Passport-specific notes:{' '}
+          <Link to="/guide/us-passport-90-180">US</Link>,{' '}
+          <Link to="/guide/uk-passport-90-180">UK</Link>.
         </p>
       </section>
 
@@ -92,47 +116,41 @@ export function GuideSchengenCountries() {
           Switzerland, and Liechtenstein are in Schengen only.
         </p>
         <p>
-          It is one pool. Moving from Italy to Switzerland does not start a new 90 days.
+          It is one pool. Moving from Italy to Switzerland does not start a new 90 days. Entry and
+          exit days both count in a country that is in the Area. A layover counts if you pass
+          Schengen passport control — see{' '}
+          <Link to="/guide/layover-schengen">does a layover count?</Link>
         </p>
         <p>
-          Entry and exit days both count in a country that is in the Area, even if you are only
-          there a few hours.
-        </p>
-        <p>
-          A layover counts if you pass Schengen passport control. Airside transit that never
-          enters the Area usually does not — see{' '}
-          <Link to="/guide/layover-schengen-days">Does a Schengen layover count?</Link>
-        </p>
-        <p>
-          Overseas territories of France, the Netherlands, and others are often outside
-          Schengen. Mainland Europe and the islands that are in the Area count; many Caribbean
-          or Pacific territories do not. Check that place by name.
-        </p>
-        <p>
-          Andorra, Monaco, San Marino, and Vatican City are not formal Schengen members. You
-          almost always reach them through Schengen, so do not treat a stay there as a free
-          reset. Days “come back” on a rolling window — see{' '}
-          <Link to="/guide/when-schengen-days-reset">When do Schengen days come back?</Link>
+          Overseas territories of France, the Netherlands, and others are often outside Schengen.
+          Andorra, Monaco, San Marino, and Vatican City are not formal Schengen members; you
+          almost always reach them through Schengen, so do not treat a stay there as a free reset.
+          Days “come back” on a rolling window —{' '}
+          <Link to="/guide/when-days-reset">when do Schengen days come back?</Link>
         </p>
         <p>
           EES and ETIAS do not change this list. They are border and pre-travel systems. The
-          29-country pool is the same.
+          29-country pool is the same for day counting.
         </p>
       </section>
 
       <section className="qa-block">
         <h2>How to use with Stay</h2>
         <p>
-          Count days in countries that are in the Schengen area for your itinerary. On the Stay
-          tool, pick the country you were physically in. Schengen members add days. Ireland,
-          Cyprus, the UK, and “Other / non-Schengen” add 0.
-        </p>
-        <p>
-          Overlapping trips in two Schengen countries on the same calendar day still count as
-          one day. Then confirm with the official calculator.
+          Count days in countries that are in the Schengen area for your itinerary. On the{' '}
+          <Link to="/stay">Stay</Link> tool, pick the country you were physically in. Schengen
+          members add days. Ireland, Cyprus, the UK, and “Other / non-Schengen” add 0. Overlapping
+          trips in two Schengen countries on the same calendar day still count as one day. Then
+          confirm with the official calculator. Read{' '}
+          <Link to="/guide/90-180">how 90/180 is counted</Link> for inclusive-day basics.
         </p>
       </section>
 
+      <FaqDetails faqs={FAQS} />
+
+      <p className="unofficial-planner-note">
+        Unofficial planner. Not the European Commission calculator.
+      </p>
       <p>
         <Link to="/stay" className="btn btn-primary">
           Open Stay
@@ -141,18 +159,14 @@ export function GuideSchengenCountries() {
       <p>
         <Link to="/guide/90-180">How 90/180 works</Link>
         {' · '}
-        <Link to="/guide/layover-schengen-days">Layover / Schengen days</Link>
+        <Link to="/guide/layover-schengen">Layover</Link>
         {' · '}
-        <Link to="/guide/ireland-uk-schengen">Ireland &amp; UK</Link>
+        <Link to="/guide/ireland-schengen">Ireland</Link>
         {' · '}
-        <Link to="/guide/when-schengen-days-reset">When days come back</Link>
+        <Link to="/guide/cyprus-schengen">Cyprus</Link>
+        {' · '}
+        <Link to="/guide/when-days-reset">When days come back</Link>
       </p>
-      <p className="muted">
-        <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
-          Official EU short-stay calculator
-        </a>
-      </p>
-
       <p className="muted">
         Staywindow is an independent planning tool — not a government site, visa shop, or claim
         company. This list is for planning only.

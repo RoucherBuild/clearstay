@@ -1,1 +1,10 @@
+# Old guide slugs → new primary paths
+/guide/layover-schengen-days  /guide/layover-schengen  301
+/guide/ireland-uk-schengen     /guide/ireland-schengen  301
+/guide/when-schengen-days-reset /guide/when-days-reset  301
+
+# www → apex (Cloudflare Pages absolute-host form; SSL "Redirect www to root" may also apply)
+https://www.thestaywindow.com/*  https://thestaywindow.com/:splat  301
+
+# SPA fallback (must stay last)
 /*    /index.html   200

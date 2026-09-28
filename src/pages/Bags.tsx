@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
+import { Link } from 'react-router-dom'
 import {
   AIRLINE_BAGS,
   bagFits,
@@ -10,6 +12,26 @@ import {
   toCm,
   type BagUnits,
 } from '../lib/bags'
+
+
+const BAGS_FAQS = [
+  {
+    q: 'What is the Ryanair cabin bag size in inches?',
+    a: 'Staywindow stores airline limits in centimetres as the source of truth and converts to inches for display. Always check Ryanair’s site for your fare — sizes and free allowances change.',
+  },
+  {
+    q: 'Are centimetres or inches the source of truth here?',
+    a: 'Centimetres. Inches are a conversion for travellers with imperial tape measures. Confirm on the airline site.',
+  },
+  {
+    q: 'Do easyJet and British Airways use the same cabin size?',
+    a: 'No. Limits differ by airline and sometimes by fare. Compare up to three airlines on this page, then check each carrier.',
+  },
+  {
+    q: 'Is a green “fits” result a guarantee?',
+    a: 'No. Gate staff and sizers have the final say. Treat the result as a planning check only.',
+  },
+]
 
 const DEFAULT_IDS = ['ryanair', 'easyjet', 'ba']
 const UNITS_KEY = 'staywindow.bagUnits'
@@ -94,14 +116,33 @@ export function Bags() {
   return (
     <>
       <RouteMeta
-        title="Cabin bag size comparison — Staywindow"
-        description="Compare typical cabin bag dimensions for major airlines. Approximate — confirm on the airline site before you fly."
+        title="Ryanair easyJet BA cabin bag size cm and inches"
+        description="Compare Ryanair, easyJet, BA and other cabin bag sizes in cm and inches. Centimetres are the source of truth — check the airline before you fly."
+        path="/bags"
+        faqs={BAGS_FAQS}
+        webApp
       />
-      <h1>Cabin bag comparison</h1>
+      <h1>Cabin bag sizes by airline</h1>
       <p className="lede">
-        Typical published limits (approximate). Always confirm on the airline site before you
-        fly.
+        Typical published limits (approximate). Centimetres are the source of truth here; inches
+        are a conversion. Always confirm on the airline site before you fly.
       </p>
+
+      <section className="qa-block stay-explainer">
+        <h2>Ryanair cabin bag size in inches (and why we still use cm)</h2>
+        <p>
+          Travellers searching “Ryanair cabin bag size inches” usually need a quick conversion from
+          the centimetre figures airlines publish. Staywindow keeps airline limits in centimetres
+          and shows inches when you toggle units. easyJet, British Airways, and other carriers on
+          this page follow the same pattern: compare side by side, then check the airline for your
+          exact fare brand.
+        </p>
+        <p>
+          Free under-seat vs larger cabin allowances change by ticket type. A “looks within limit”
+          result is not a guarantee at the gate. See also{' '}
+          <Link to="/bags/ryanair-vs-united">Ryanair vs United</Link>.
+        </p>
+      </section>
 
       <div className="unit-toggle" role="group" aria-label="Measurement units">
         <button
@@ -204,6 +245,8 @@ export function Bags() {
         Hard disclaimer: dimensions and free allowances change by fare and route. Confirm on the
         airline site before you fly. This is not a guarantee your bag will be accepted.
       </p>
+
+      <FaqDetails faqs={BAGS_FAQS} />
     </>
   )
 }

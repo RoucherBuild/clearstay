@@ -14,14 +14,27 @@ const MORE_LINKS = [
   { to: '/photo', label: 'Photo' },
   { to: '/guide/90-180', label: '90/180' },
   { to: '/guide/schengen-countries', label: 'Schengen countries' },
-  { to: '/guide/layover-schengen-days', label: 'Layover / Schengen days' },
-  { to: '/guide/ireland-uk-schengen', label: 'Ireland, UK & Schengen' },
-  { to: '/guide/when-schengen-days-reset', label: 'When days come back' },
+  { to: '/guide/layover-schengen', label: 'Layover / Schengen days' },
+  { to: '/guide/ireland-schengen', label: 'Ireland & Schengen' },
+  { to: '/guide/cyprus-schengen', label: 'Cyprus & Schengen' },
+  { to: '/guide/us-passport-90-180', label: 'US passport 90/180' },
+  { to: '/guide/uk-passport-90-180', label: 'UK passport 90/180' },
+  { to: '/guide/when-days-reset', label: 'When days come back' },
   { to: '/prep', label: 'Prep' },
   { to: '/faq', label: 'FAQ' },
   { to: '/about', label: 'About' },
   { to: '/terms', label: 'Terms' },
 ] as const
+
+const PLANNER_NOTE_PATHS = new Set([
+  '/stay',
+  '/flights',
+  '/bags',
+  '/photo',
+  '/ees',
+  '/prep',
+  '/faq',
+])
 
 function moreIsActive(pathname: string): boolean {
   if (pathname === '/' || pathname === '/privacy') return true
@@ -34,6 +47,10 @@ function moreIsActive(pathname: string): boolean {
     pathname === '/terms' ||
     pathname === '/photo'
   )
+}
+
+function showPlannerNote(pathname: string): boolean {
+  return PLANNER_NOTE_PATHS.has(pathname) || pathname.startsWith('/guide/')
 }
 
 export function Layout() {
@@ -139,19 +156,30 @@ export function Layout() {
       </main>
 
       <footer className="site-footer">
+        {showPlannerNote(location.pathname) && (
+          <p className="unofficial-planner-note">
+            Unofficial planner. Not the European Commission calculator.
+          </p>
+        )}
         <p className="footer-guides">
           <NavLink to="/guide/90-180">90/180</NavLink>
           {' · '}
           <NavLink to="/guide/schengen-countries">Schengen countries</NavLink>
           {' · '}
-          <NavLink to="/guide/layover-schengen-days">Layover</NavLink>
+          <NavLink to="/guide/layover-schengen">Layover</NavLink>
           {' · '}
-          <NavLink to="/guide/ireland-uk-schengen">Ireland &amp; UK</NavLink>
+          <NavLink to="/guide/ireland-schengen">Ireland</NavLink>
           {' · '}
-          <NavLink to="/guide/when-schengen-days-reset">When days come back</NavLink>
+          <NavLink to="/guide/cyprus-schengen">Cyprus</NavLink>
+          {' · '}
+          <NavLink to="/guide/when-days-reset">When days come back</NavLink>
+          {' · '}
+          <NavLink to="/guide/us-passport-90-180">US passport</NavLink>
+          {' · '}
+          <NavLink to="/guide/uk-passport-90-180">UK passport</NavLink>
           {' · '}
           <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
-            EU short-stay calculator
+            Official EU short-stay calculator
           </a>
         </p>
         <p className="footer-disclaimer">

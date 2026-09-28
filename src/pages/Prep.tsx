@@ -1,12 +1,30 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
+import { EU_SHORT_STAY_CALCULATOR } from '../lib/officialLinks'
 import {
   PREP_ITEMS,
   loadPrepChecks,
   savePrepChecks,
   type PrepCheckState,
 } from '../lib/prepChecklist'
+
+
+const PREP_FAQS = [
+  {
+    q: 'What should I do before a Europe trip regarding ETIAS and EES?',
+    a: 'Read official EU EES and ETIAS pages, track your Schengen days, and confirm with the official EU short-stay calculator. Staywindow does not sell ETIAS applications.',
+  },
+  {
+    q: 'Does this checklist guarantee entry?',
+    a: 'No. It is an unofficial on-device planning list. Border decisions remain with the state.',
+  },
+  {
+    q: 'Where are my checklist ticks stored?',
+    a: 'On this device only in localStorage. Nothing is uploaded.',
+  },
+]
 
 export function Prep() {
   const [checks, setChecks] = useState<PrepCheckState>({})
@@ -31,14 +49,28 @@ export function Prep() {
   return (
     <>
       <RouteMeta
-        title="Border prep checklist — Staywindow"
-        description="On-device checklist to help visa-free travellers prepare for Schengen/EES borders. Expectations only — not legal advice."
+        title="Europe trip prep checklist (unofficial)"
+        description="Unofficial ETIAS/EES Europe trip prep checklist. Official links only — not an ETIAS mill. Confirm the EU short-stay calculator."
+        path="/prep"
+        faqs={PREP_FAQS}
       />
-      <h1>Border prep checklist</h1>
+      <h1>Europe trip prep checklist (unofficial)</h1>
       <p className="lede">
-        A practical list for visa-free short-stay travellers heading to Schengen / EES borders.
-        Tick items on this device — nothing is uploaded.
+        What to do before a Europe trip: EES expectations, ETIAS awareness, and Schengen day
+        tracking. Tick items on this device — nothing is uploaded. Not an ETIAS application mill.
       </p>
+      <section className="qa-block stay-explainer">
+        <h2>ETIAS, EES, and what to do before you go</h2>
+        <p>
+          Travellers searching “ETIAS EES what to do before Europe trip” need calm steps, not a
+          shop. Read official EU pages for EES and ETIAS, estimate days on{' '}
+          <NavLink to="/stay">Stay</NavLink>, then confirm with the{' '}
+          <a href={EU_SHORT_STAY_CALCULATOR} target="_blank" rel="noopener noreferrer">
+            official EU short-stay calculator
+          </a>
+          . See <NavLink to="/ees">EES vs the 90/180 calculator</NavLink>.
+        </p>
+      </section>
       <p className="disclaimer" role="note">
         Expectations for planning, not guarantees of entry. Not legal advice, and not affiliated
         with the EU or any government. Rules and officer questions vary.
@@ -107,10 +139,12 @@ export function Prep() {
         </ul>
       </section>
 
+      <FaqDetails faqs={PREP_FAQS} />
+
       <p className="muted small">
         Related: <NavLink to="/stay">Stay calculator</NavLink>
         {' · '}
-        <NavLink to="/ees">What is EES?</NavLink>
+        <NavLink to="/ees">EES vs 90/180</NavLink>
       </p>
     </>
   )

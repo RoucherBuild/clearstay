@@ -17,6 +17,7 @@ export function BagsRyanairVsUnited() {
       <RouteMeta
         title="Ryanair vs United cabin bag sizes (cm and in) | Staywindow"
         description="Compare common cabin limits in cm and inches. Unofficial — always check the airline before you fly."
+        path="/bags/ryanair-vs-united"
       />
       <h1>Ryanair vs United cabin bag sizes</h1>
       <p className="lede">

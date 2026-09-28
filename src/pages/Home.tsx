@@ -5,8 +5,9 @@ export function Home() {
   return (
     <>
       <RouteMeta
-        title="Staywindow — How many Europe days do you have left?"
-        description="Check Schengen 90/180 days left, flight delay bands, cabin bag limits, and passport photo sizes. Free planning tools — data stays on your device."
+        title="Staywindow — unofficial Schengen 90/180 planner"
+        description="Unofficial Schengen 90/180 planner plus delay bands, cabin bags, and photo sizes. Free tools — data stays on your device."
+        path="/"
       />
       <section className="hero-block">
         <h1>How many Europe days do you have left?</h1>
@@ -22,10 +23,21 @@ export function Home() {
             My flight was delayed
           </Link>
         </div>
+        <p className="home-spoke-links">
+          <Link to="/stay">Stay calculator</Link>
+          {' · '}
+          <Link to="/guide/schengen-countries">Countries that count</Link>
+          {' · '}
+          <Link to="/guide/90-180">90/180 explained</Link>
+        </p>
         <p className="unofficial-line">Unofficial estimate — not the EU.</p>
         <p className="muted home-nationality-note">
           US, UK, Australia, or Canada passport? See the{' '}
-          <Link to="/stay">nationality checklist on Stay</Link> (not legal advice).
+          <Link to="/stay">nationality checklist on Stay</Link> (not legal advice). Passport
+          guides:{' '}
+          <Link to="/guide/us-passport-90-180">US</Link>
+          {' · '}
+          <Link to="/guide/uk-passport-90-180">UK</Link>
         </p>
       </section>
 

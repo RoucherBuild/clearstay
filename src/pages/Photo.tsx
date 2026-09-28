@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { RouteMeta } from '../components/RouteMeta'
+import { FaqDetails } from '../components/FaqDetails'
 import { SCHENGEN_COUNTRIES } from '../lib/schengen'
 import { buildTripFromForm } from '../lib/stampAssist'
 import {
@@ -8,6 +9,22 @@ import {
   saveTripsToStorage,
   todayYmd,
 } from '../lib/tripsPersist'
+
+
+const PHOTO_FAQS = [
+  {
+    q: 'What is the Schengen visa photo size in mm?',
+    a: 'Many Schengen visa applications use a 35×45 mm photo. Confirm the mission’s checklist — requirements can differ.',
+  },
+  {
+    q: 'Does Staywindow upload my photo?',
+    a: 'No. Optional previews stay in your browser via a local object URL. Nothing is uploaded to a server.',
+  },
+  {
+    q: 'Are US and UK passport sizes the same?',
+    a: 'No. US passports commonly use 2×2 inches; UK and many EU/Schengen-style forms use 35×45 mm. Pick the matching preset.',
+  },
+]
 
 type Preset = {
   id: string
@@ -149,14 +166,27 @@ export function Photo() {
   return (
     <>
       <RouteMeta
-        title="Photo tools — Staywindow"
-        description="Passport photo size presets with local preview, plus stamp and boarding-pass assist to rebuild Stay trips on this device."
+        title="Visa and passport photo size checker"
+        description="Check Schengen visa photo size in mm (often 35×45), plus US, UK, AU, and CA passport presets. Local preview only — nothing uploaded."
+        path="/photo"
+        faqs={PHOTO_FAQS}
+        webApp
       />
-      <h1>Photo tools</h1>
+      <h1>Visa and passport photo size checker</h1>
       <p className="lede">
-        Passport print sizes and optional stamp / boarding-pass recall. Images stay on this
-        device — nothing is uploaded to a server.
+        Check common visa and passport photo sizes — including Schengen-style 35×45 mm — with
+        optional local preview. Images stay on this device; nothing is uploaded to a server.
       </p>
+      <section className="qa-block stay-explainer">
+        <h2>Schengen visa photo size in mm</h2>
+        <p>
+          Many Schengen visa applications ask for a 35×45 mm colour photo. Missions publish head
+          size, background, and recency rules that this checker does not replace. Use the EU /
+          Schengen-style preset for a print-size orientation, then follow the consulate checklist.
+          US 2×2 in, UK 35×45 mm, Australian, and Canadian presets are listed for passport-style
+          planning on the same page.
+        </p>
+      </section>
       <p className="muted small">
         Related: <NavLink to="/stay">Stay calculator</NavLink>
         {' · '}
@@ -331,6 +361,8 @@ export function Photo() {
         {' · '}
         <NavLink to="/prep">Border prep</NavLink>
       </p>
+      <FaqDetails faqs={PHOTO_FAQS} />
+
     </>
   )
 }

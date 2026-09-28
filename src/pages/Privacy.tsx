@@ -6,6 +6,7 @@ export function Privacy() {
       <RouteMeta
         title="Privacy — Staywindow"
         description="Staywindow v1 has no accounts and no analytics. Trip data stays in localStorage and optional share URLs on your device."
+        path="/privacy"
       />
       <h1>Privacy</h1>
       <p className="lede">Short and honest for v1.</p>
