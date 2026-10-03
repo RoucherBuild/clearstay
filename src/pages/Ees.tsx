@@ -42,8 +42,9 @@ export function Ees() {
         <p>
           The Entry/Exit System is an EU border system that electronically records when non-EU
           travellers enter and leave the Schengen area (biometrics and travel document data),
-          replacing manual passport stamping for many travellers. Rollout timing and airport
-          readiness can vary — check official updates before you travel.
+          replacing manual passport stamping for many travellers. EES has been fully operational
+          at external Schengen borders since 10 April 2026. The desk experience can still differ
+          by airport, and the 90/180 day count is unchanged.
         </p>
       </section>
 

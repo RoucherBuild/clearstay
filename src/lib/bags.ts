@@ -16,7 +16,7 @@ export const AIRLINE_BAGS: readonly AirlineBagLimit[] = [
   {
     id: 'ryanair',
     name: 'Ryanair',
-    maxCm: [40, 20, 25],
+    maxCm: [40, 30, 20],
     maxKg: null,
     notes: 'Small personal bag under seat (free). Larger cabin bag often paid Priority.',
   },
