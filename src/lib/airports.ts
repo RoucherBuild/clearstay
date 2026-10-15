@@ -84,6 +84,20 @@ export const BAND_PAYOUT = {
   long: { eur: 600, gbp: 520, label: '> 3,500 km' },
 } as const
 
+/** Reduced long-band tier: > 3,500 km with arrival delay of 3 to under 4 hours. */
+export const LONG_BAND_REDUCED = { eur: 300, gbp: 260 } as const
+
+/** Rough band payout for a distance band and arrival delay (hours). Estimate only. */
+export function bandPayout(
+  band: DistanceBand,
+  delayHours: number,
+): { eur: number; gbp: number } {
+  if (band === 'long' && delayHours >= 3 && delayHours < 4) {
+    return { eur: LONG_BAND_REDUCED.eur, gbp: LONG_BAND_REDUCED.gbp }
+  }
+  return { eur: BAND_PAYOUT[band].eur, gbp: BAND_PAYOUT[band].gbp }
+}
+
 export function isUsDomestic(depIata: string, arrIata: string): boolean {
   const dep = findAirport(depIata)
   const arr = findAirport(arrIata)

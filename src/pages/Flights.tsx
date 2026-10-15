@@ -7,6 +7,7 @@ import { TermsGate } from '../components/TermsGate'
 import {
   AIRPORTS,
   BAND_PAYOUT,
+  bandPayout,
   bandFromKm,
   findAirport,
   greatCircleKm,
@@ -224,7 +225,7 @@ function FlightsCalculator() {
               </option>
               <option value="short">≤ 1,500 km → €250 / ~£220 band</option>
               <option value="medium">1,500–3,500 km → €400 / ~£350 band</option>
-              <option value="long">&gt; 3,500 km → €600 / ~£520 band</option>
+              <option value="long">&gt; 3,500 km → €300 / ~£260 if 3–4 h late; €600 / ~£520 if 4+ h</option>
             </select>
           </label>
         </div>
@@ -265,11 +266,11 @@ function FlightsCalculator() {
             </p>
             <div className="result-numbers">
               <div>
-                <span className="big-num">€{BAND_PAYOUT[band].eur}</span>
+                <span className="big-num">€{bandPayout(band, delayHours).eur}</span>
                 <span className="num-label">EU261 band</span>
               </div>
               <div>
-                <span className="big-num">£{BAND_PAYOUT[band].gbp}</span>
+                <span className="big-num">£{bandPayout(band, delayHours).gbp}</span>
                 <span className="num-label">UK261-style band (approx.)</span>
               </div>
             </div>
