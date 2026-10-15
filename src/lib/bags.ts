@@ -100,7 +100,7 @@ export const AIRLINE_BAGS: readonly AirlineBagLimit[] = [
   {
     id: 'b6',
     name: 'JetBlue',
-    maxCm: [55, 40, 23],
+    maxCm: [56, 36, 23],
     maxKg: null,
     notes: 'Personal item + carry-on; size limits apply.',
   },
